@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- html5 선언문 -->
+<html>
+    <head>
+        <!-- 현재 페이지 설정 정보 -->
+        <meta charset="UTF-8" />
+        <title>안녕 html</title>
+    </head>
+    <body>
+        <!-- 시각화될 페이지 내용을 작성 -->
+        <h1>HTML5</h1>
+        <p>Hello world</p>
+        <p>Byebye world</p>
+
+        <div>
+            <h2>상대경로</h2>
+            <a href="foo.html">foo 페이지로 가기</a>
+            <a href="../bar.html">bar 페이지로 가기</a>
+        </div>
+        <div>
+            <h2>절대경로</h2>
+            <a href="http://172.28.220.90:5500/01_html/foo.html"
+                >foo 페이지로 가기</a
+            >
+            <a href="http://172.28.220.90:5500/bar.html">bar 페이지로 가기</a>
+        </div>
+
+        <!-- 상대경로: 현재 페이지를 기준으로 경로 탐색 -->
+        <!-- 절대경로: protocol://host:port는 '/'로 대체 가능-->
+
+        <!-- ul>li*2>a -->
+        <ul>
+            <li><a href="01_text.html">01_text.html</a></li>
+            <li><a href="02_list.html">02_list.html</a></li>
+        </ul>
+    </body>
+</html>
