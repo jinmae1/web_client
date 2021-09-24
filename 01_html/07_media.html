@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>media</title>
+    </head>
+    <body>
+        <h1>media</h1>
+
+        <h2>audio</h2>
+        <audio src="../sample/audio/major.mp3" controls="controls"></audio>
+        <audio
+            src="../sample/audio/major.mp3"
+            controls
+            autoplay
+            muted
+            loop
+            preload=""
+        ></audio>
+        <audio>
+            <source src="../sample/audio/major.mp3" />
+            <!-- fallback -->
+            지원 x
+        </audio>
+
+        <h2>video</h2>
+        <video
+            controls
+            loop
+            muted
+            poster="../sample/image/city1.PNG"
+            width="300px"
+        >
+            <!--
+			pc웹 브라우저라면 mp4, webm, ogg 모두 처리 가능
+			mobile 브라우저라면 mp4, 3gp 포맷 처리 가능
+		-->
+            <source src="../sample/video/small.mp4" type="video/mp4" />
+            <source src="../sample/video/small.webm" type="video/webm" />
+            <source src="../sample/video/small.ogv" type="video/ogg" />
+            지원 x
+        </video>
+    </body>
+</html>
