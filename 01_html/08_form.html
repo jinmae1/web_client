@@ -147,8 +147,106 @@ sdfsd</textarea
                 />
             </fieldset>
 
+            <fieldset>
+                <legend>선택관련 select 태그</legend>
+                <select name="menu" id="menu" multiple>
+                    <optgroup label="음식">
+                        <option value="순대국">순대국</option>
+                        <option value="김치찌개">김치찌개</option>
+                        <option value="순두부찌개">순두부찌개</option>
+                        <option value="된장찌개">된장찌개</option>
+                    </optgroup>
+                </select>
+
+                <br />
+                <input type="text" name="browser" list="browser-list" />
+                <datalist id="browser-list">
+                    <option value="ie">Internet Explorer</option>
+                    <option value="chrome">Google Chrome</option>
+                    <option value="safari">Apple Safari</option>
+                </datalist>
+            </fieldset>
+
+            <fieldset>
+                <legend>선택관련 radio/checkbox</legend>
+                <!-- 택1해야 하는 경우 -->
+                <p>
+                    성별:
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="gender-male"
+                        value="남"
+                    />
+                    <label for="gender-male">남</label>
+                    <input
+                        type="radio"
+                        name="gender"
+                        id="gender-female"
+                        value="여"
+                    />
+                    <label for="gender-female">여</label>
+                    <!-- name 속성값이 같기 때문에 하나의 그룹으로 묶임 -->
+                </p>
+                <p>
+                    SNS:
+                    <input
+                        type="checkbox"
+                        name="sns"
+                        id="sns-facebook"
+                        value="facebook"
+                    />
+                    <label for="sns-facebook">Facebook</label>
+                    <input
+                        type="checkbox"
+                        name="sns"
+                        id="twitter"
+                        value="twieer"
+                    />
+                    <label for="sns-twitter">Twitter</label>
+                    <input
+                        type="checkbox"
+                        name="sns"
+                        id="instagram"
+                        value="instagram"
+                    />
+                    <label for="sns-instagram">Instagram</label>
+                </p>
+
+                <p>
+                    <label for="receive-email">email 수신여부</label>
+                    <input
+                        type="checkbox"
+                        name="receive-email"
+                        id="receive-email"
+                    />
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>기타 input 태그</legend>
+                <input
+                    type="color"
+                    name="color"
+                    id="color"
+                    value="#16e98e"
+                    disabled
+                />
+                <br />
+
+                <input type="file" name="upfile" id="upfile" />
+                <input type="hidden" name="abc" value="12345667" />
+            </fieldset>
+
             <br />
             <input type="submit" value="제출" />
+            <input type="reset" value="초기화" />
+
+            <button type="button"></button>
+            <button type="submit"></button>
+            <!-- submit이 기본값이다. -->
+
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         </form>
     </body>
 </html>
