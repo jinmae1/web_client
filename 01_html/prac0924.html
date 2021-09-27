@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>prac0924</title>
+    </head>
+    <body>
+        <form action="" name="supply-info">
+            <fieldset>
+                <legend>납품자 정보</legend>
+                <ol>
+                    <li>
+                        <label for="supplier-name">납품자명:</label>
+                        <input
+                            type="text"
+                            name="supplier-name"
+                            id="supplier-name"
+                            placeholder="필수"
+                            required
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="">이메일:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="필수"
+                            required
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="">홈페이지:</label>
+                        <input
+                            type="text"
+                            name="hompage"
+                            id="hompage"
+                            value="http://"
+                            placeholder="http://"
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="">지역:</label>
+                        <select name="region" id="region">
+                            <option value="Boosan">부산</option>
+                            <option value="Seoul">서울</option>
+                            <option value="Incheon">인천</option>
+                        </select>
+                    </li>
+                </ol>
+            </fieldset>
+
+            <fieldset>
+                <legend>납품 정보</legend>
+                <ul>
+                    <li>
+                        <label for="product-name">상품명:</label>
+                        <input
+                            type="text"
+                            name="product-name"
+                            id="product-name"
+                            placeholder="필수"
+                            required
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="">납품수량:</label>
+                        <input
+                            type="number"
+                            name="quantity"
+                            id="quantity"
+                            min="100"
+                            placeholder="최소 100"
+                            required
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="grade">납품등급:</label>
+                        <input type="range" name="grade" id="grade" required />
+                    </li>
+                    <br />
+                    <li>
+                        <label for="region">기타사항:</label>
+                        <textarea
+                            name="etc"
+                            id="etc"
+                            cols="20"
+                            rows="3"
+                        ></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <input type="submit" value="send message" />
+        </form>
+    </body>
+</html>
