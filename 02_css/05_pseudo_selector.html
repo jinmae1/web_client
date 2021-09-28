@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pseudo selector</title>
+    </head>
+    <body>
+        <h1>Pseudo selector</h1>
+        <div class="wrapper">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi ullam quibusdam officia blanditiis error unde
+                perspiciatis? Veritatis nostrum quis unde recusandae natus,
+                vitae sequi odio voluptatum quibusdam repudiandae voluptatem
+                asperiores!
+            </p>
+            <p>
+                Asperiores, earum odio. Tempore ipsa eaque numquam natus. Vero
+                ut et facere! Harum necessitatibus quae et eum aspernatur
+                doloribus dolorem. Minima alias excepturi id ex quo quae
+                consequatur fugit asperiores.
+            </p>
+            <p>
+                Doloribus quas, nobis exercitationem ut dolorem inventore minus
+                ipsum dignissimos omnis illum, suscipit sunt fuga ipsam?
+                Praesentium nihil quisquam, quaerat, sint quos cumque similique
+                tempora omnis reiciendis et, corporis officiis?
+            </p>
+            <p>
+                Beatae repellat provident pariatur. Saepe iste natus at veniam
+                velit veritatis id consequuntur eius ut, deserunt incidunt, illo
+                fuga quo enim numquam voluptate qui porro a perspiciatis sint
+                excepturi facilis?
+            </p>
+            <p>
+                Aut unde maiores possimus fugit omnis tenetur, eaque numquam
+                aliquam rerum dignissimos nobis necessitatibus nemo mollitia
+                similique quis alias recusandae qui! Molestias totam veniam
+                ipsum repellendus deserunt, sapiente debitis nihil?
+            </p>
+        </div>
+    </body>
+
+    <style>
+        /* 
+		:pseudo-class: 상태
+		::pseudo-element: 요소추가
+		 */
+        .wrapper p::first-letter {
+            font-size: 2em;
+        }
+
+        .wrapper p::first-line {
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        /* .wrapper p::before {
+            content: "BEFORE";
+        } */
+
+        .wrapper p::selection {
+            background-color: hotpink;
+            color: white;
+        }
+
+        /* 부모컨테이너에서 카운터 변수 선언 및 초기화 */
+        /* 위키 주석 효과 */
+        .wrapper {
+            counter-reset: num;
+        }
+
+        .wrapper p::before {
+            content: counter(num) ". ";
+            counter-increment: num;
+        }
+    </style>
+</html>

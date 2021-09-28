@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>text</title>
+    </head>
+    <body>
+        <h1>text</h1>
+        <div class="wrapper">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi ullam quibusdam officia blanditiis error unde
+                perspiciatis? Veritatis nostrum quis unde recusandae natus,
+                vitae sequi odio voluptatum quibusdam repudiandae voluptatem
+                asperiores!
+            </p>
+            <p>
+                Asperiores, earum odio. Tempore ipsa eaque numquam natus. Vero
+                ut et facere! Harum necessitatibus quae et eum aspernatur
+                doloribus dolorem. Minima alias excepturi id ex quo quae
+                consequatur fugit asperiores.
+            </p>
+            <p>
+                Doloribus quas, nobis exercitationem ut dolorem inventore minus
+                ipsum dignissimos omnis illum, suscipit sunt fuga ipsam?
+                Praesentium nihil quisquam, quaerat, sint quos cumque similique
+                tempora omnis reiciendis et, corporis officiis?
+            </p>
+            <p>
+                Beatae repellat provident pariatur. Saepe iste natus at veniam
+                velit veritatis id consequuntur eius ut, deserunt incidunt, illo
+                fuga quo enim numquam voluptate qui porro a perspiciatis sint
+                excepturi facilis?
+            </p>
+            <p>
+                Aut unde maiores possimus fugit omnis tenetur, eaque numquam
+                aliquam rerum dignissimos nobis necessitatibus nemo mollitia
+                similique quis alias recusandae qui! Molestias totam veniam
+                ipsum repellendus deserunt, sapiente debitis nihil?
+            </p>
+        </div>
+
+        <style>
+            .wrapper p:first-child {
+                color: blueviolet;
+                color: #fab;
+                color: rgb(255, 100, 200);
+                color: rgb(255 100 200 / 20%);
+                color: rgba(255, 100, 200, 0.7);
+            }
+            .wrapper p:first-child:hover {
+                color: rgba(47, 36, 44, 1);
+            }
+
+            .wrapper p:nth-child(2) {
+                text-decoration: underline;
+            }
+
+            .wrapper p:nth-child(3) {
+                /* x-offset y-offset blur color */
+                text-shadow: 3px 3px 7px gray;
+            }
+        </style>
+        <div id="bg">
+            <span id="text-shadow1" class="shadow">HTML5</span>
+            <br />
+            <span id="text-shadow2" class="shadow">HTML5</span>
+            <br />
+            <span id="text-shadow3" class="shadow">HTML5</span>
+            <br />
+            <span id="text-shadow4" class="shadow">HTML5</span>
+            <br />
+        </div>
+        <style>
+            div#bg {
+                background-color: #000;
+                margin: 30px;
+                padding: 50px;
+                text-align: center;
+                font-family: sans-serif;
+            }
+            .shadow {
+                font-size: 100px;
+                line-height: 100px;
+                font-weight: bold;
+                color: white;
+            }
+
+            #text-shadow1 {
+                color: red;
+                text-shadow: 4px 4px 0px orange;
+            }
+
+            #text-shadow2 {
+                color: white;
+                text-shadow: 0px 0px 20px white;
+            }
+            #text-shadow3 {
+                color: white;
+                text-shadow: 0px 0px 40px rgb(126, 231, 116);
+            }
+            #text-shadow4 {
+                color: black;
+                text-shadow: 0px -10px 15px orange, -1px 0px 15px yellow;
+                /* text-shadow: -1px 0px 10px orange; */
+            }
+        </style>
+    </body>
+</html>

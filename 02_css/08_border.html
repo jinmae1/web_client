@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>border</title>
+    </head>
+    <body>
+        <h1>border</h1>
+        <div class="box"></div>
+        <div class="box border-radius">
+            <img src="../sample/image/hyunta.jpg" alt="" width="100%" />
+        </div>
+
+        <style>
+            .box {
+                width: 300px;
+                height: 300px;
+                background-color: yellowgreen;
+                border-width: 10px;
+                border-style: solid;
+                border-top-color: gray;
+                border-right-color: red;
+                border-bottom-color: blue;
+                border-left-color: yellow;
+                margin: 10px;
+            }
+
+            .border-radius {
+                /* border-radius: 10px 50px 150px 500px; */
+                border-radius: 50%;
+                /* 50%일 때 원이 된다. */
+                overflow: hidden;
+            }
+        </style>
+        <div class="square"></div>
+        <style>
+            .square {
+                width: 300px;
+                height: 300px;
+                background-color: skyblue;
+                border: 5px solid gray;
+                margin: 100px auto;
+                /* inset x-offset y-offset blur spread color */
+                /* spread 그림자 크기 양수/음수 */
+                box-shadow: 5px 5px 10px 3px gray;
+            }
+        </style>
+    </body>
+</html>
