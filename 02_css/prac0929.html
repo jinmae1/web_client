@@ -8,7 +8,7 @@
         <h2>사진 갤러리 만들기</h2>
         <hr />
         <div id="gallery">
-            <ul class="flex">
+            <ul>
                 <li>
                     <img
                         src="../sample/image/flower1.PNG"
@@ -67,8 +67,11 @@
         </div>
         <style>
             #gallery {
+                width: 500px;
                 display: flex;
                 justify-content: center;
+                display: flex;
+                margin: auto;
             }
             .pic {
                 display: none;
@@ -77,7 +80,7 @@
                 left: 110px;
                 z-index: 999;
             }
-            ul.flex {
+            ul {
                 background-color: #444;
                 border-width: 16px;
                 border-style: solid;
@@ -87,23 +90,19 @@
                 list-style-type: none;
                 display: flex;
                 flex-wrap: wrap;
-                /* overflow: hidden; */
                 justify-content: center;
                 padding: 40px 0px;
             }
-            ul.flex li {
+            ul li {
                 margin: 4px;
                 text-align: center;
                 position: relative;
             }
-            ul.flex li > img:first-child {
-                /* transform: scale(2); */
-                opacity: 0.8;
-            }
             li:hover .pic {
                 border: 8px solid black;
+                transform: scale(0.8);
+                transform-origin: top left;
                 display: block;
-                /* position: relative; */
             }
         </style>
     </body>
