@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>access dom</title>
+    </head>
+    <body>
+        <h1>access dom</h1>
+        <!-- 
+		DOM: Document Object Model
+		html의 모든 태그를 자바스크립트 객체로 등록해둔 것            
+	 -->
+        <!-- div.wrapper>ul>li#li$.foo{안녕$}*5 -->
+        <div class="wrapper">
+            <ul>
+                <li id="li1" class="foo">안녕1</li>
+                <li id="li2" class="foo">안녕2</li>
+                <li id="li3" class="foo">안녕3</li>
+                <li id="li4" class="foo">안녕4</li>
+                <li id="li5" class="foo">안녕5</li>
+            </ul>
+        </div>
+        <button id="btn1" onclick="test1();">getID</button>
+        <button id="btn2" onclick="test2();">getTagName</button>
+        <button id="btn3" onclick="test3();">getClassName</button>
+
+        <fieldset style="margin-top: 30px">
+            <legend>Favorite Movies</legend>
+            <!-- (input:checkbox[name=movie][value]#movies$+label[for=moive$])*5 -->
+            <input
+                type="checkbox"
+                name="movie"
+                id="movies1"
+                value="마법사의 돌"
+            />
+            <label for="moive1">마법사의 돌</label>
+            <input
+                type="checkbox"
+                name="movie"
+                id="movies2"
+                value="비밀의 방"
+            />
+            <label for="moive2">비밀의 방</label>
+            <input
+                type="checkbox"
+                name="movie"
+                id="movies3"
+                value="아즈카반의 죄수"
+            />
+            <label for="moive3">아즈카반의 죄수</label>
+            <input type="checkbox" name="movie" id="movies4" value="불의 잔" />
+            <label for="moive4">불의 잔</label>
+            <input
+                type="checkbox"
+                name="movie"
+                id="movies5"
+                value="불사조 기사단"
+            />
+            <label for="moive5">불사조 기사단</label>
+            <br />
+
+            <!-- this 용법1: 태그의 이벤트 속성에서 사용된 this는 태그 객체 자신을 가리킨다. -->
+            <input
+                type="checkbox"
+                id="checkAll"
+                onchange="checkAllOrNone(this);"
+            />
+            <label for="checkAll">모두선택/해제</label>
+        </fieldset>
+        <button id="btn4" onclick="test4();">getName</button>
+
+        <script>
+            /**
+             *
+             * id접근
+             * tag접근
+             * class접근
+             * name접근
+             *
+             */
+            function test1() {
+                var elem = document.getElementById("li1");
+                console.log(elem, typeof elem);
+                console.dir(elem);
+
+                // getter/setter
+                console.log(elem.innerHTML);
+                elem.innerHTML = "Bye";
+
+                elem.style.color = "hotpink";
+
+                var elem_null = document.getElementById("dfdfd");
+                // 존재하지 않는 아이디 참조시 null 리턴 -> object타입이고 undefined와 다르다.
+            }
+
+            function test2() {
+                var elems = document.getElementsByTagName("li");
+                console.log(elems, typeof elems);
+
+                for (var i = 0; i < elems.length; i++) {
+                    var li = elems[i];
+                    console.log(li);
+                    li.innerHTML = "잘가" + (i + 1);
+                }
+            }
+
+            /**
+             * var
+             *
+             * let 변수선언
+             * const 상수선언
+             */
+
+            function test3() {
+                let elems = document.getElementsByClassName("foo");
+                console.log(elems, typeof elems);
+
+                for (const elem of elems) {
+                    console.log(elem);
+                    elem.style.backgroundColor = "orange";
+                }
+            }
+
+            /**
+             * name 속성
+             */
+
+            function test4() {
+                let movies = document.getElementsByName("movie");
+                // console.dir(movies);
+
+                movies.forEach((movie) => {
+                    console.log(movie);
+                    movie.checked = true;
+                });
+            }
+
+            function checkAllOrNone(elem) {
+                const movies = document.getElementsByName("movie");
+                // document.getElementsByName("movie").forEach((movie) => {
+                // movie.checked = document.getElementById("checkAll").checked;
+                // });
+
+                // document.getElementById를 안써도 된다. Id에 한해서
+                // document.getElementsByName("movie").forEach((movie) => {
+                // movie.checked = checkAll.checked;
+                // });
+
+                for (let i = 0; i < movies.length; i++) {
+                    movies[i].checked = elem.checked;
+                }
+            }
+        </script>
+    </body>
+</html>

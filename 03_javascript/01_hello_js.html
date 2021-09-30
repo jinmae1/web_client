@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hello js</title>
+        <script src="./js/main.js"></script>
+        <script>
+            // 내부 스크립트 1: head 종료 태그 이전
+            console.log("안녕1");
+        </script>
+    </head>
+    <body>
+        <h1>hello js</h1>
+        <div>
+            <button id="btn1" onclick="alert(12345);">인라인 이벤트속성</button>
+            <button id="btn2" onclick="foo();">내부 스크립트</button>
+            <button id="btn3" onclick="bar('asd');">외부 스크립트</button>
+        </div>
+
+        <button id="btn4" onclick="test();">실행</button>
+        <script>
+            /**
+             * 자료형
+             * 	- string
+             * 	- number
+             * 	- boolean
+             * 	- object(배열)
+             * 	- function
+             * 	- undefined
+             *
+             * 	literal에 따라 변수의 자료형이 결정된다.
+             * 	그 전까지는 undefined
+             */
+            function test() {
+                var a;
+                console.log(a, typeof a); // undefined 'undefined'
+                // 값 자체가 undefined이다. null처럼
+                a = "안녕";
+                console.log(a, typeof a); // 안녕 string
+                a = 123;
+                console.log(a, typeof a); // 123 'number'
+                a = null;
+                console.log(a, typeof a); // null 'object'
+
+                var bool = false;
+                console.log(bool, typeof bool);
+
+                var arr = [1, 2, 3, "a", "b", "c", ["ㅋ", "ㅌ", "ㅍ"]];
+                console.log(arr);
+
+                var obj = {
+                    lang: "ko",
+                    price: 12345,
+                    married: false,
+                    nums: [1, 2, 3, 4, 5],
+                };
+                console.log(obj, typeof obj);
+
+                var f = function (a, b) {
+                    return a + b;
+                };
+
+                console.log(f, typeof f);
+            }
+        </script>
+
+        <script>
+            // 내부 스크립트 2: body 종료 태그 이전
+            console.log("안녕2");
+            function foo(params) {
+                console.log("안녕3");
+                alert("foo");
+            }
+        </script>
+    </body>
+</html>
