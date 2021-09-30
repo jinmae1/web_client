@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>갤러리 만들기</title>
+    </head>
+    <body>
+        <h2>사진 갤러리 만들기</h2>
+        <hr />
+        <div id="gallery">
+            <ul class="flex">
+                <li>
+                    <img
+                        src="../sample/image/flower1.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/flower1.PNG" class="pic" />
+                </li>
+                <li>
+                    <img
+                        src="../sample/image/flower2.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/flower2.PNG" class="pic" />
+                </li>
+                <li>
+                    <img
+                        src="../sample/image/flower3.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/flower3.PNG" class="pic" />
+                </li>
+                <li>
+                    <img
+                        src="../sample/image/flower4.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/flower4.PNG" class="pic" />
+                </li>
+                <li>
+                    <img
+                        src="../sample/image/flower5.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/flower5.PNG" class="pic" />
+                </li>
+                <li>
+                    <img
+                        src="../sample/image/forest1.PNG"
+                        class="small"
+                        width="120"
+                        height="90"
+                    />
+                    <img src="../sample/image/forest1.PNG" class="pic" />
+                </li>
+            </ul>
+        </div>
+        <style>
+            #gallery {
+                display: flex;
+                justify-content: center;
+            }
+            .pic {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 110px;
+                z-index: 999;
+            }
+            ul.flex {
+                background-color: #444;
+                border-width: 16px;
+                border-style: solid;
+                border-color: black;
+                width: 600px;
+                align-self: center;
+                list-style-type: none;
+                display: flex;
+                flex-wrap: wrap;
+                /* overflow: hidden; */
+                justify-content: center;
+                padding: 40px 0px;
+            }
+            ul.flex li {
+                margin: 4px;
+                text-align: center;
+                position: relative;
+            }
+            ul.flex li > img:first-child {
+                /* transform: scale(2); */
+                opacity: 0.8;
+            }
+            li:hover .pic {
+                border: 8px solid black;
+                display: block;
+                /* position: relative; */
+            }
+        </style>
+    </body>
+</html>
