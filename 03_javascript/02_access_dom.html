@@ -153,5 +153,171 @@
                 }
             }
         </script>
+
+        <h2>css 선택자를 이요한 dom 접근</h2>
+        <button onclick="test5();">querySelector</button>
+        <button onclick="test6();">querySelectorAll</button>
+
+        <!-- div>(p.koo>lorem)*3 -->
+        <div>
+            <p class="koo">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio
+                doloribus deleniti asperiores distinctio voluptas culpa
+                perferendis reiciendis. Inventore, commodi itaque. Officiis vel
+                consequatur rem aliquam quis similique autem, culpa nisi.
+            </p>
+            <p id="myp" class="koo">
+                Accusamus iste odio laudantium ab nulla ipsum repellendus culpa,
+                tempora voluptates corrupti deserunt sed ipsam ad minus, saepe,
+                recusandae cumque? Molestiae ad distinctio laboriosam minima,
+                libero magni nostrum vel iste.
+            </p>
+            <p class="koo">
+                Magni, vitae qui illo, accusamus doloribus nostrum dolorum
+                reiciendis aut labore quam voluptas autem eos dolore dolor alias
+                incidunt. Dolorem, eius. Consequuntur necessitatibus eaque quam
+                nihil iure, aspernatur iusto rerum.
+            </p>
+        </div>
+
+        <script>
+            /**
+             * querySelector(css selector)
+             * 부합하는 태그 중 첫 번째 요소를 리턴
+             */
+            function test5() {
+                const p = document.querySelector(".koo");
+                console.log(p);
+                p.style.color = "tomato";
+            }
+            // let test5_1 = () =>
+            /**
+             *	querySelectorAll(css selector)
+             *	해당하는 태그 전부를 배열로 리턴
+             */
+            function test6() {
+                const elems = document.querySelectorAll(".koo");
+                console.log(elems);
+
+                let b = 50;
+                elems.forEach((elem) => {
+                    elem.style.backgroundColor = "rgb(100, 100, " + b + ")";
+                    b += 50;
+                });
+            }
+        </script>
+
+        <section>
+            <h2>수강신청</h2>
+            <table>
+                <tr>
+                    <td colspan="5">
+                        <input
+                            type="checkbox"
+                            id="checkAll2"
+                            onclick="checkAllSubject(this);"
+                        />
+                        <label for="checkAll2">모두선택/해제</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font">
+                        <input
+                            type="checkbox"
+                            name="subject"
+                            id="subject1"
+                            onclick="checkSubject(this);"
+                        /><label for="subject1">국어</label>
+                    </td>
+                    <td class="font">
+                        <input
+                            type="checkbox"
+                            name="subject"
+                            id="subject2"
+                            onclick="checkSubject(this);"
+                        /><label for="subject2">영어</label>
+                    </td>
+                    <td class="font">
+                        <input
+                            type="checkbox"
+                            name="subject"
+                            id="subject3"
+                            onclick="checkSubject(this);"
+                        /><label for="subject3">수학</label>
+                    </td>
+                    <td class="font">
+                        <input
+                            type="checkbox"
+                            name="subject"
+                            id="subject4"
+                            onclick="checkSubject(this);"
+                        /><label for="subject4">사회</label>
+                    </td>
+                    <td class="font">
+                        <input
+                            type="checkbox"
+                            name="subject"
+                            id="subject5"
+                            onclick="checkSubject(this);"
+                        /><label for="subject5">과학</label>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <script>
+            function checkSubject(subject) {
+                // console.log(subject);
+                const td = subject.parentElement;
+                // console.log(td);
+                if (subject.checked) td.classList.add("on");
+                else td.classList.remove("on");
+                check(subject);
+                const subjects = document.querySelectorAll("[name=subject]");
+            }
+            function checkAllSubject(checkAll) {
+                const subjects = document.querySelectorAll("[name=subject]");
+                subjects.forEach((subject) => {
+                    // subject.checked = checkAll.checked;
+                    // subject.click();
+                });
+
+                for (let i = 0; i < subjects.length; i++) {
+                    subjects[i].checked = checkAll.checked;
+                    const td = subjects[i].parentElement;
+                    if (checkAll.checked) {
+                        // td.className = "on";
+                        td.classList.add("on");
+                    } else {
+                        // td.className = "";
+                        td.classList.remove("on");
+                    }
+                }
+            }
+
+            function check(subject) {
+                if (!subject.checked) return (checkAll2.checked = false);
+            }
+        </script>
+        <style>
+            section {
+                text-align: center;
+            }
+            table {
+                border: 1px solid #000;
+                margin: auto;
+                border-collapse: collapse;
+            }
+            td {
+                border: 1px solid #000;
+                padding: 10px;
+            }
+            .on {
+                background-color: cornflowerblue;
+                color: #fff;
+            }
+            .font {
+                color: red;
+            }
+        </style>
     </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>api</title>
+    </head>
+    <body>
+        <h1>string</h1>
+        <button onclick="test1();">실행</button>
+        <button onclick="test2();">실습문제</button>
+        <script>
+            /**
+             * string내장객체
+             */
+            function test1() {
+                const str = "apple Samsung Pineapple";
+                console.log(str.length); // 23
+                console.log(str.charAt(1));
+                console.log(str[1]);
+                console.log(str.indexOf("app"));
+                console.log(str.indexOf("bpp")); // -1
+
+                // 잘라내기
+                // str.substring(startIndex[, endIndex]): start부터 end전까지 문자열 반환
+                console.log(str.substring(6, 9));
+                // str.substr(stratIndex[, length]): start부터 length만큼 문자열 반환
+                console.log(str.substr(6, 3));
+
+                // 토근처리
+                const arr = str.split(" ");
+                console.log(arr, typeof arr);
+            }
+        </script>
+
+        <script>
+            /**
+             * @실습문제: 사용자로부터 영화제목을 입력받고, 알파벳의 개수를 출력하세요.
+             *
+             */
+            function test2() {
+                let count = 0;
+                const movie = prompt("영화 제목");
+                if (movie)
+                    for (const letter of movie)
+                        if (isAlphabetic(letter)) count++;
+                alert(count);
+
+                let isLowerCase = (letter) => "a" <= letter && letter <= "z";
+                let isUpperCase = (letter) => "A" <= letter && letter <= "Z";
+                let isAlphabetic = (letter) =>
+                    isLowerCase(letter) || isUpperCase(letter);
+            }
+        </script>
+
+        <h1>math</h1>
+
+        <h1>date</h1>
+    </body>
+</html>

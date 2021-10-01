@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>variable</title>
+    </head>
+    <body>
+        <h1>variable</h1>
+        <button onclick="foo();">실행</button>
+        <script>
+            var a = "global"; // 전역
+            // window하위의 객체가 된다.
+            console.log(window);
+
+            function foo() {
+                var a = "local"; // 지역
+                console.log(a);
+                console.log(window.a);
+
+                // this 용법 2: 일반함수 안에서 this는 window 전역객체를 의미함
+                console.log(this.a);
+            }
+        </script>
+
+        <h2>function scope</h2>
+        <button onclick="bar();">실행</button>
+        <script>
+            /**
+             * var 키워드로 선언된 변수는 함수 scope를 가진다.
+             * 	- 오직 함수의 안과 밖만을 구분한다.
+             *  - C족 언어의 block scope와 다르므로 유의해서 사용
+             */
+            function bar() {
+                var k = 1;
+                if (true) {
+                    var k = 2;
+                }
+                console.log(k);
+            }
+
+            for (var i = 0; i < 10; i++) {}
+            console.log(i); // 자바에서는 오류지만, 자바스크립트에선 된다.
+        </script>
+
+        <h2>block scope</h2>
+        <button onclick="hoo();">실행</button>
+        <script>
+            /**
+             * let block scope를 가진 변수선언 키워드
+             * const block scope를 가진 상수선언 키워드. 초기화 필수
+             *
+             * 전역에 선언해도 window객체의 속성으로 등록되지 않는다.(!= var)
+             */
+            function hoo() {
+                let k = 1;
+                // let k = 3; // 유효성 검사되어 중복 선언은 불가
+                if (true) {
+                    let k = 2;
+                }
+                console.log(k);
+            }
+
+            for (let j = 0; j < 10; j++) {}
+            // console.log(j); // 오류
+            const z = 2;
+        </script>
+    </body>
+</html>
