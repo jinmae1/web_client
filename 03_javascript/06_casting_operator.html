@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>casting | operator</title>
+    </head>
+    <body>
+        <h1>casting</h1>
+        <button onclick="test1()">실행</button>
+        <button onclick="test2()">number | parseInt | parseFloat</button>
+
+        <fieldset>
+            <legend>a + b</legend>
+            <!-- label[for=a]+input:number#a[placeholder='숫자a를 입력하세요'] -->
+            <label for="a">a </label>
+            <input type="number" id="a" placeholder="숫자a를 입력하세요" />
+            <br />
+            <label for="b">b</label>
+            <input type="number" id="b" placeholder="숫자b를 입력하세요" />
+            <br />
+            <button onclick="test3()">확인</button>
+        </fieldset>
+        <script>
+            function test1() {
+                let n = 3 + "3"; // '3' + "3"
+                console.log(3 + "3", typeof n); // 33 string
+                n = 3 + 3 + "3";
+                console.log(n, typeof n); // 63 string
+
+                n = 3 - "3"; // 3 - 3
+                console.log(n, typeof n); // 0 'number'
+                n = 3 * "3"; // 3 * 3
+                console.log(n, typeof n); // 9 'number'
+                n = 3 / "3"; // 3 / 3
+                console.log(n, typeof n); // 1 'number'
+                n = 3 % "3"; // 3 % 3
+                console.log(n, typeof n); // 0 'number'
+
+                n = 3 - "a"; // 3 - NaN
+                console.log(n, typeof n); // NaN 'number'
+
+                console.log(3 == "3"); // 3 == 3 true
+                console.log(3 != "3"); // 3 == 3 false
+
+                // 엄격 비교연산자
+                // 자동 형변환 없이 값과 타입이 모두 일치해야 true 리턴
+                console.log(3 === "3"); // false
+                console.log(3 !== "3"); // true
+            }
+
+            /**
+             *	Number(): 숫자(정수, 실수)로 변환, 숫자가 아닌 문자가 **포함**되면 NaN을 리턴
+             *
+             *	parseInt(): 정수로 변환, 숫자가 아닌 문자가 나오기 전까지 변환. 아예 변환 불가 시 NaN을 리턴
+             * parssFloat(): 실수로 변환, 숫자가 아닌 문자가 나오기 전까지 변환. 아예 변환 불가 시, NaN을 리턴(작동 원리는 parseInt와 같다.)
+             */
+            function test2() {
+                let n = "123.456원";
+                n = "$123.456";
+                // n = "4.5E+10";
+                n = n.replace(/[^0-9.]/g, "");
+                console.log(Number(n), typeof Number(n));
+                console.log(parseInt(n), typeof parseInt(n));
+                console.log(parseFloat(n), typeof parseFloat(n));
+            }
+
+            /**
+             *	사용자입력 숫자 a,b의 합을 구해서 경고창 출력
+             */
+            function test3() {
+                alert(Number(a.value) + Number(b.value));
+            }
+            // const test3 = () => alert(Number(a.value) + Number(b.value));
+        </script>
+
+        <button onclick="test4();">boolean</button>
+        <script>
+            /**
+             * true: 값이 있는 것
+             * "abc", 123, array, object
+             * false: 값이 없는 것
+             * 빈문자열(""), 0, undefined, NaN, null
+             */
+            function test4() {
+                console.log(Boolean("ABC"));
+                console.log(
+                    Boolean(""),
+                    Boolean(0),
+                    Boolean(undefined),
+                    Boolean(null),
+                    Boolean(NaN)
+                ); // false
+
+                // 사용자의 b의 값 입력 여부
+                if (b.value) console.log("b의 값을 입력함", b.value);
+                else console.log("b의 값을 입력하지 않음", b.value);
+
+                // 특정 요소 존재 여부
+                const elem = document.querySelector("#aaa");
+                console.log(elem);
+                if (!elem) {
+                    const h1 = document.createElement("h1");
+                    h1.id = "aaa";
+                    h1.innerHTML = "안녕";
+                    document.body.append(h1);
+                }
+            }
+        </script>
+
+        <h1>operator</h1>
+        <button onclick="test5();">실행</button>
+        <button onclick="test6();">값 대입</button>
+
+        <script>
+            /**
+             *	(conditional expression) && (statement when true)
+             *	(conditional expression) || (statement when false)
+             */
+            function test5() {
+                const n = Math.floor(Math.random() * 10);
+                console.log(n);
+                !(n % 2) && alert(`${n}은 짝수입니다.`);
+            }
+
+            /**
+             *	k = (a || b)
+             *	- a가 값이 있다면(true라면) k에 a를 대입
+             * 	- a가 값이 없다면(false라면), 우항의 b를 k에 대입
+             * 		undefined, null, 0, NaN, ''
+             */
+            function test6() {
+                const k = a.value || b.value;
+                console.log(k);
+
+                const n = "33";
+                const r = 33 - n || 33 + n;
+                console.log(r);
+            }
+        </script>
+    </body>
+</html>
