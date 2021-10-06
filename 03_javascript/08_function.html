@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>function</title>
+    </head>
+    <body>
+        <h1>function</h1>
+        <script>
+            /**
+             * 함수 선언식 Function Declaration
+             * Hoisting 됨
+             * Hoisting: 함수 선언식, var 키워드를 통해 선언된 변수를 미리 끌어올려 (전)처리하는 것
+             */
+            test1();
+            function test1() {
+                console.log("test1");
+            }
+            /**
+             * 함수 표현식 Function Expression
+             * Hoisting 안 됨
+             *
+             * 함수를 값처럼 변수 test2에 대입
+             * 우변: 익명함수
+             */
+            // test2();
+            const test2 = function () {
+                console.log("test2");
+            };
+
+            /**
+             * 화살표 함수 Arrow Function
+             * - 함수 몸통에 return 절만 존재하는 경우 {return} 생략 가능
+             * - 함수 몸통에 실행코드가 한 줄만 존재하는 경우 {} 생략 가능
+             *
+             * - 화살표 함수는 무조건 익명함수
+             * - 화살표 함수는 생성자 함수로 사용할 수 없다.
+             * - 화살표 함수의 this는 부모 scope의 this를 가져와 사용한다.
+             * - eventHandler로 사용한 화살표 함수의 this는 이벤트 발생 객체가 아니다.
+             */
+            const test3 = () => console.log("test3");
+
+            const test4 = (a, b) => a + b;
+            const test5 = (c) => console.log(c);
+
+            /**
+             * 즉시 실행 함수 IIFE
+             * Immediately Invoked Function Expression
+             * - 선언과 호출을 동시에 처리
+             * - 변수를 지역 scope처리해서 값을 보호할 수 있다.
+             *
+             * (function(){})();
+             * (function(){}());
+             */
+            (function () {
+                console.log(123);
+            })();
+            (function () {
+                console.log(456);
+            })(); // 괄호가 안에 있었는데 formatter가 자동으로 밖으로 꺼내버린다.
+
+            (() => console.log(789))();
+            (() => console.log(101010))(); // 람다는 안쪽 괄호가 불가능하다시피 하다. 그냥 밖에 쓰자.
+
+            const doremi = "doremi";
+            ((a) => console.log(a))(doremi); // 인자 전달
+        </script>
+
+        <h2>매개변수 | 인자</h2>
+        <button onclick="test6(10); test6(this)">실행</button>
+
+        <script>
+            /**
+             * args와 params의 개수가 일치하지 않아도 된다.
+             * - 해당하는 매개변수가 없다면, 인자가 버려진다.
+             * - 해당하는 인자가 없다면, undefined 처리된다.
+             * - arguments: 전달된 인자를 유사배열의 형태로 참조
+             */
+            function test6(a) {
+                console.log(a);
+                console.log(arguments);
+            }
+        </script>
+
+        <h2>리턴</h2>
+        <button onclick="console.log('리턴:', test7());">실행</button>
+        <script>
+            /**
+             * 리턴값 없을 시 무조건 undefined
+             */
+
+            const test7 = () => {
+                return 3;
+            };
+        </script>
+
+        <h2>함수 고급</h2>
+        <button onclick="test8(sayHello);">인수로 함수 전달</button>
+        <button onclick="let f = test9(); f(222);">함수 리턴</button>
+        <button onclick="test9()(111);">함수 리턴</button>
+        <!-- 리턴값이 함수이므로 이런 식()()으로도 가능하다.-->
+        <button onclick="test10();">함수 생성</button>
+
+        <script>
+            const sayHello = (n) => {
+                console.log(`Hello${n}`);
+            };
+            function sayHello_() {
+                console.log(`Hello${arguments[0]}`); // 화살표함수에는 arguments가 없다.
+            }
+            const test8 = (f) => {
+                console.log(f, typeof f);
+                for (let i = 0; i < 10; i++) {
+                    f(i + 1);
+                }
+            };
+
+            const test9 = () => {
+                // const foo = (a) => console.log(a);
+                // return foo;
+                return (a) => console.log(a); // 위의 문장을 이렇게 한줄로 처리가 가능하다.
+            };
+
+            const test10 = () => {
+                // 안녕, 철수
+                // 잘가, 영희
+                const hello = makeFunction("안녕");
+                const bye = makeFunction("잘가");
+
+                hello("철수");
+                bye("영희");
+            };
+
+            const makeFunction = (greeting) => {
+                return (name) => console.log(`${greeting} ${name}`);
+            };
+        </script>
+    </body>
+</html>
