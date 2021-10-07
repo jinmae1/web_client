@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Closure</title>
+    </head>
+    <body>
+        <h2>Closure</h2>
+        <h3>free variable</h3>
+
+        <button onclick="test11('철수')">test11() 실행</button>
+        <button onclick="test12()">test12() 실행</button>
+
+        <script>
+            const weather = "오늘은 비가 온다~";
+            /**
+             * 자유변수
+             * - 지역 scope에 선언되지 않은 변수
+             * - 전역변수가 항상 자유변수는 아니다 nested function일 때, 예외이기 때문
+             */
+
+            const test11 = (name) => {
+                const greeting = "안녕";
+                const say = `${greeting}, ${name}! ${weather}~`; // 여기서 weather가 자유변수다(지역 scope 밖)
+                console.log(say);
+            };
+
+            // CLOSURE
+            /**
+             * closure
+             * 참조하는 자유변수를 가지고 외부로부터 닫힌 함수
+             */
+
+            // prac1006.html에 있던 4번 문제
+            ///////////////////////////////////////////
+            function foo() {
+                const num = 100;
+                return () => {
+                    console.log(`num = ${num}`);
+                };
+            }
+            // const num = 200;
+            // const too = foo();
+            // too(); // 100
+            ////////////////////////////////////////////
+
+            const test12 = () => {
+                const num = 200;
+                const too = foo(); // too는 자유변수 num을 자체적으로 가지고 있다.
+                console.log(too, typeof too);
+                console.dir(too); // devtool에서 [[Scopes]]를 참조하면 Closure에 num이 있다.
+                too();
+                // num의 이름을 변경해서도 생각해보자
+            };
+        </script>
+
+        <button onclick="test13()">test13 실행 전역변수 카운터</button>
+        <button onclick="test14()">test14 실행 클로저 카운터</button>
+        <h1 id="g_counter">0</h1>
+        <h1 id="c_counter">0</h1>
+        <script>
+            let n = 0; // 전역이기 때문에 외부로부터 의도치 않게 변경될 소지가 있다.
+            const test13 = () => {
+                n++;
+                g_counter.innerHTML = n;
+            };
+
+            const makeCounter = () => {
+                let m = 0; // 외부에서 m에 접근할 방법이 전혀 없다.
+                return () => {
+                    m++;
+                    c_counter.innerHTML = m;
+                };
+            };
+            const test14 = makeCounter(); // makeCounter()이 자유변수(let m = 0;)도 함께 가져온다.
+        </script>
+        <!--
+			None
+		-->
+        <fieldset>
+            <legend>가산기</legend>
+            <h1 id="sum">0</h1>
+            <input type="number" name="" id="userNum" />
+            <button onclick="test15();">test15(); 더하기</button>
+            <button onclick="test15_(userNum.value);">test15(); 더하기</button>
+        </fieldset>
+        <script>
+            const accumulator = () => {
+                let acc = Number(sum.innerHTML);
+                console.log(sum.innerHTML);
+                return (num) => {
+                    acc += Number(num);
+                    sum.innerHTML = acc;
+                };
+            }; // 내가 한건데 이상하다고 생각했으나 오히려 맞는듯? /////////////////////
+
+            const makeAdder = () => {
+                let s = 0;
+                return () => {
+                    s += Number(userNum.value);
+                    sum.innerHTML = s;
+                    userNum.value = ""; // 이거는 입력 후 값 초기화 해주는 기능이고 로직 상 빠져도 큰 문제는 없다.
+                };
+            };
+
+            const test15 = makeAdder();
+            const test15_ = accumulator();
+        </script>
+
+        <button onclick="test16()">test16() x3</button>
+        <button onclick="test17()">test17() x5</button>
+        <button onclick="test16_(3)">test16(3) x3</button>
+        <button onclick="test17_(5)">test17(5) x5</button>
+        <h1 id="x3">1</h1>
+        <h1 id="x5">1</h1>
+
+        <script>
+            const multiply = (elem, m) => {
+                return () => {
+                    elem.innerHTML = Number(elem.innerHTML) * m;
+                };
+            };
+            // 아래 방식으로 하면 호출 시점에서 몇을 곱할지 결정할 수 있다.
+            const multiply_ = (elem) => {
+                return (m) => {
+                    elem.innerHTML = Number(elem.innerHTML) * m;
+                };
+            };
+            const test16 = multiply(x3, 3);
+            const test17 = multiply(x5, 5);
+            const test16_ = multiply_(x3);
+            const test17_ = multiply_(x5);
+        </script>
+
+        <fieldset>
+            <legend>text 추가하기</legend>
+            <input type="text" name="" id="userText" />
+            <button onclick="test18(userText);">강사님 mark</button>
+            <button onclick="test19(userText);">강사님 ins</button>
+            <button onclick="test18_(this.innerHTML);">mark</button>
+            <button onclick="test19_(this.innerHTML);">ins</button>
+        </fieldset>
+        <div class="box"></div>
+        <!-- <mark>123</mark> -->
+        <!-- <ins>abc</ins> -->
+        <script>
+            /**
+             * #userText의 사용자 입력값을 mark태그, ins태그를 .box에 추가하는 closure함수 작성하기
+             */
+            const addText_ = () => {
+                const box = document.querySelector(".box");
+                return (tagName) => {
+                    const node = document.createElement(tagName);
+                    node.innerHTML = userText.value;
+                    box.append(node);
+                    userText.value = "";
+                };
+            };
+            const test18_ = addText_();
+            const test19_ = addText_();
+
+            ///////// 강사님 풀이 여기선 tag와 box가 자유변수다.
+            // 내 풀이는 클로저를 활용하지 못한 코드
+            const addText = (tag) => {
+                const box = document.querySelector(".box");
+                return (input) => {
+                    // 여기서 input은 그냥 id로 가져올 수 있는데 굳이 param으로 전달하는 이유는 모르겠음
+                    const elem = document.createElement(tag);
+                    elem.innerHTML = input.value;
+                    box.append(elem, " ");
+                    input.value = "";
+                };
+            };
+
+            const test18 = addText("mark");
+            const test19 = addText("ins");
+        </script>
+    </body>
+</html>

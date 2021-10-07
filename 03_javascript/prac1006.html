@@ -1,0 +1,42 @@
+<script>
+    //1
+    let z = 50;
+    (() => {
+        let z = 55;
+        z += 45;
+        console.log(`z = ${z}`); // 지역변수 55 + 45 = 100
+    })(); // 지역변수 z 소멸
+    console.log(`z = ${z}`); // 전역변수 50
+
+    //2
+    let y = 99;
+    (() => {
+        let x = 100;
+        let y = 9;
+        z = 1; // 전역
+        console.log(`x + y + z = ${x + y + z}`); // 100 + 9 + 1
+    })();
+    console.log(`y + z = ${y + z}`); // 99 + 1
+    x = undefined;
+    console.log(`x + y + z = ${x + y + z}`); // undefined + 99 + 1 = NaN
+
+    //3
+    //전역 for문의 var로 선언된 내부변수 i
+    for (var i = 1; i <= 10; i++) {
+        console.log(i); // 1~10까지 출력
+    }
+    (() => {
+        console.log(`i = ${i}`); // var이 함수범위에서 유효하므로 11
+    })();
+
+    //4
+    function foo() {
+        const num = 100;
+        return () => {
+            console.log(`num = ${num}`);
+        };
+    }
+    const num = 200;
+    const too = foo();
+    too(); // 100
+</script>
