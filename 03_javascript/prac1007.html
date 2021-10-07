@@ -12,21 +12,21 @@
                 type="radio"
                 name="category"
                 value="title"
-                onclick="showDiv1(this);"
+                onclick="showDiv1();"
                 id="title"
             /><label for="title">제목</label>&nbsp; &nbsp;
             <input
                 type="radio"
                 name="category"
                 value="date"
-                onclick="showDiv1(this);"
+                onclick="showDiv1();"
                 id="date"
             /><label for="date">날짜</label>&nbsp; &nbsp;
             <input
                 type="radio"
                 name="category"
                 value="writer"
-                onclick="showDiv1(this);"
+                onclick="showDiv1();"
                 id="writer"
             /><label for="writer">작성자</label>&nbsp; &nbsp;
         </fieldset>
@@ -61,13 +61,12 @@
             //제목 체크시, titleBox 만 보여지게
             //날짜 체크시, dateBox 만 보여지게
             //작성자 체크시, writerBox 만 보여지게 함
-            function showDiv1(selected) {
-                selected ||= { id: undefined };
-
-                const boxes = document.querySelectorAll(".box");
-                for (const box of boxes)
-                    box.style.display =
-                        box.id != selected.id + "Box" ? "none" : "";
+            function showDiv1() {
+                const options = document.querySelectorAll("[name=category]");
+                for (const option of options) {
+                    const box = document.querySelector(`#${option.value}Box`);
+                    box.style.display = option.checked ? "" : "none";
+                }
             }
         </script>
     </body>
