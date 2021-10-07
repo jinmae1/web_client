@@ -61,14 +61,13 @@
             //제목 체크시, titleBox 만 보여지게
             //날짜 체크시, dateBox 만 보여지게
             //작성자 체크시, writerBox 만 보여지게 함
-            function showDiv1(inputTag) {
-                if (!inputTag) inputTag = { id: undefined };
+            function showDiv1(selected) {
+                selected ||= { id: undefined };
 
-                const tags = document.querySelectorAll(".box");
-                for (const tag of tags)
-                    if (tag.id != inputTag.id + "Box")
-                        tag.style.display = "none";
-                    else tag.style.display = "initial";
+                const boxes = document.querySelectorAll(".box");
+                for (const box of boxes)
+                    box.style.display =
+                        box.id != selected.id + "Box" ? "none" : "";
             }
         </script>
     </body>
