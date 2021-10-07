@@ -154,7 +154,7 @@
                 return (tagName) => {
                     const node = document.createElement(tagName);
                     node.innerHTML = userText.value;
-                    box.append(node);
+                    box.appendChild(node);
                     userText.value = "";
                 };
             };
