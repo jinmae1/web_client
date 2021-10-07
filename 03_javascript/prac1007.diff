@@ -1,0 +1,53 @@
+--- original1007.html	2021-10-07 22:08:30.515458000 +0900
++++ prac1007.html	2021-10-07 22:06:02.562562100 +0900
+@@ -4,7 +4,7 @@
+         <meta charset="UTF-8" />
+         <title>@실습문제3</title>
+     </head>
+-    <body>
++    <body onload="showDiv1();">
+         <h2>@실습문제3</h2>
+         <fieldset>
+             <legend>검색할 항목을 선택하세요.</legend>
+@@ -12,21 +12,21 @@
+                 type="radio"
+                 name="category"
+                 value="title"
+-                onclick="showDiv1();"
++                onclick="showDiv1(this);"
+                 id="title"
+             /><label for="title">제목</label>&nbsp; &nbsp;
+             <input
+                 type="radio"
+                 name="category"
+                 value="date"
+-                onclick="showDiv1();"
++                onclick="showDiv1(this);"
+                 id="date"
+             /><label for="date">날짜</label>&nbsp; &nbsp;
+             <input
+                 type="radio"
+                 name="category"
+                 value="writer"
+-                onclick="showDiv1();"
++                onclick="showDiv1(this);"
+                 id="writer"
+             /><label for="writer">작성자</label>&nbsp; &nbsp;
+         </fieldset>
+@@ -61,7 +61,15 @@
+             //제목 체크시, titleBox 만 보여지게
+             //날짜 체크시, dateBox 만 보여지게
+             //작성자 체크시, writerBox 만 보여지게 함
+-            function showDiv1() {}
++            function showDiv1(inputTag) {
++                if (!inputTag) inputTag = { id: undefined };
++
++                const tags = document.querySelectorAll(".box");
++                for (const tag of tags)
++                    if (tag.id != inputTag.id + "Box")
++                        tag.style.display = "none";
++                    else tag.style.display = "initial";
++            }
+         </script>
+     </body>
+ </html>
