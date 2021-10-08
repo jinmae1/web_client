@@ -69,6 +69,15 @@
                     box.style.display =
                         box.id != selected.id + "Box" ? "none" : "";
             }
+
+            // alternative solution
+            function showDiv2() {
+                const options = document.querySelectorAll("[name=category]");
+                for (const option of options) {
+                    const box = document.querySelector(`#${option.value}Box`);
+                    box.style.display = !option.checked ? "none" : "";
+                }
+            }
         </script>
     </body>
 </html>
