@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nullish colaescing operator</title>
+    </head>
+    <body>
+        <h1>Falsy</h1>
+        <a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy"
+            >MDN: Falsy</a
+        >
+        <h1>Nullish colaescing operator</h1>
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator"
+            >MDN: Nullish coalescing operator</a
+        >
+
+        <h1>Logical nullish assignment</h1>
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_nullish_assignment"
+            >MDN: Logical nullish assingment
+        </a>
+        https://stackoverflow.com/questions/68173744/javascript-logical-nullish-assignment-equivalence
+
+        <script>
+            /**
+             * List of falsy and truthy values
+             * false, 0, -0, 0n, "", '', ``, null, undefined, NaN, document.all
+             *
+             */
+            //  const falsies = [false, 0, -0, 0n, "", '', ``, null, undefined, NaN, document.all];
+            const falsyMap = new Map([
+                ["false", false],
+                ["0", 0],
+                ["-0", -0],
+                ["0n", 0n],
+                ['""', ""],
+                ["''", ""],
+                ["``", ``],
+                ["null", null],
+                ["undefined", undefined],
+                ["NaN", NaN],
+                ["document.all", document.all],
+            ]);
+
+            const falsies = {
+                false: false,
+                0: 0,
+                "-0": -0,
+                "0n": 0n,
+                '""': "",
+                "''": "",
+                "``": ``,
+                null: null,
+                undefined: undefined,
+                NaN: NaN,
+                // "document.all": document.all,
+            };
+            const truthy = [
+                true,
+                {},
+                [],
+                42,
+                "0",
+                "false",
+                new Date(),
+                -42,
+                12n,
+                3.14,
+                -3.14,
+                Infinity,
+                -Infinity,
+            ];
+            const y = "Hello";
+
+            const logical_or = (falsy) => {
+                // let x = falsies[falsy];
+                const x = !falsies[falsy];
+                // const y = true;
+                const result = x || y;
+                console.log(`${falsy}: ${result}`);
+            };
+
+            const nullish_coalescing = (falsy) => {
+                // let x = falsies[falsy];
+                const x = !falsies[falsy];
+                // const y = true;
+                const result = x ?? y;
+                console.log(`${falsy}: ${result}`);
+            };
+
+            const equivalent = (falsy) => {
+                // let x = falsies[falsy];
+                const x = !falsies[falsy];
+                // const y = true;
+                const result = x ?? (x = y);
+                console.log(`${falsy}: ${result}`);
+            };
+
+            /**
+             * ! 왜 not equivalent이냐면 x를 const x = 'truthy';로 설정했을 때
+             * ! 기존 것들은 두번째 피연산자, 혹은 우변을 evaluate하지 않아서 const라도 오류가 나지 않는데
+             * ! 아래 case에 한해서만 오류가 난다. x가 falsy든 truthy든 무조건 값 대입을 시도하려고 하기 때문이다.
+             * ! 그래서
+             * ! 1) x ??= y;
+             * ! 2) x = x ?? y;
+             * ! 3) x ?? (x = y);
+             * ! 에서 2번의 경우는 동치가 아니다.
+             * ! 꼭 nullish 케이스가 아니더라도 ||= &&= 같은 복합대입 연산자에서도 마찬가지로 적용된다.
+             *
+             * 이와 별개로 ||= 는 모든 falsy에 대해서 같은 결과를 내놓으므로 사용을 자제하는 것이 좋다.
+             */
+            const not_equivalent = (falsy) => {
+                // let x = falsies[falsy];
+                const x = !falsies[falsy];
+                // const y = true;
+                const result = (x = x ?? y);
+                console.log(`${falsy}: ${result}`);
+            };
+
+            console.log("-----------------------------------");
+            Object.keys(falsies).forEach(logical_or);
+            console.log("-----------------------------------");
+            Object.keys(falsies).forEach(nullish_coalescing);
+            console.log("-----------------------------------");
+            Object.keys(falsies).forEach(equivalent);
+            console.log("-----------------------------------");
+            Object.keys(falsies).forEach(not_equivalent);
+
+            // for (const item in falsies) {
+            // console.log(falsies[item]);
+            // }
+        </script>
+    </body>
+</html>

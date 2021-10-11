@@ -1,0 +1,44 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+            function Student(name, java, oracle, html5, css3, javascript) {
+                this.name = name;
+                this.subject = {
+                    java: java,
+                    oracle: oracle,
+                    html5: html5,
+                    css3: css3,
+                    javascript: javascript,
+                };
+
+                this.getSum = function () {
+                    return (
+                        this.subject.java +
+                        this.subject.oracle +
+                        this.subject.html5 +
+                        this.subject.css3 +
+                        this.subject.javascript
+                    );
+                };
+
+                this.getAvg = function () {
+                    let count = 0;
+                    for (const subject in this.subject) {
+                        console.log(subject, this.subject[subject]);
+                        count++;
+                    }
+                    return this.getSum() / count;
+                };
+            }
+
+            const students = [
+                new Student("김동현", 90, 56, 56, 45, 34),
+                new Student("홍길동", 45, 76, 34, 33, 56),
+                new Student("유관순", 76, 34, 54, 56, 22),
+            ];
+
+            students.forEach((student) => console.log(student.getAvg()));
+        </script>
+    </body>
+</html>

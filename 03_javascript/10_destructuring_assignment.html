@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>distructuring assignment</title>
+    </head>
+    <body></body>
+    <h1>distructuring assignment</h1>
+    <!-- 구조분해 할당(비구조화 할당) -->
+    <h2>배열</h2>
+    <button onclick="test1();">test1 실행</button>
+    <button onclick="test1_();">test1_ 실행</button>
+    <script>
+        /**
+         * 배열 구조분해 할당
+         */
+        const test1 = () => {
+            const arr = [1, 2, 3];
+
+            const a = arr[0];
+            const b = arr[1];
+            const c = arr[2];
+            // 위 아래가 표현만 다르고 결과가 같다.
+            const [A, B, C] = arr;
+
+            console.log(A);
+            console.log(B);
+            console.log(C);
+
+            const [d, e] = arr;
+            console.log(d); // 1
+            console.log(e); // 2
+
+            const [D, , F] = arr; // 이렇게 건너뛸 수도 있다.
+            console.log(D); // 1
+            console.log(F); // 3
+
+            const [dd, , ff, gg] = arr;
+            console.log(gg); // undefined
+
+            // 기본값 할당: 할당된 값이 없는 경우 기본값 사용
+            const [g = 77, , , , h = 100] = arr;
+            console.log(g); // g = 1 얘는 기본값이 있으니까 77이 무시된다.
+            console.log(h); // h = 100
+
+            // 값 교환
+            let i = 7;
+            let j = 8;
+            [i, j] = [j, i];
+            console.log(i, j);
+
+            // 함수 리턴값
+            // 나머지 파라미터: 마지막에만 사용 가능
+            const [k, l, m, ...rest] = foo();
+            // 전개 연산자에서 다뤘다.
+            // 배열 concat할 때
+            console.log(k);
+            console.log(l);
+            console.log(m);
+            console.log(rest);
+
+            // 배열인 함수인자
+            koo(rest);
+        };
+
+        const foo = () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const koo = ([a, b, ...rest]) => {
+            console.log(a, b);
+            console.log(rest);
+        };
+    </script>
+
+    <button onclick="test1_()">csv 평균구하기</button>
+
+    <script>
+        const test1_ = () => {
+            // csv데이터를 다룰 때 사용
+            const data =
+                "홍길동,남,90,80,70|신사임당,여,88,100,50|전봉준,남,55,80,77";
+
+            data.split("|").forEach((row) => {
+                printAverage(row.split(","));
+            });
+            console.log("=========================================");
+
+            const temp = data.split("|");
+            const students = temp.map((s) => s.split(","));
+            console.log(students);
+            console.log("++++++++++++++++++++++++++++++++++++");
+
+            students.forEach((student) => printStudentInfo(student));
+            /**
+             * 위의 문장에서 왼쪽의 student와 오른쪽의 student가 완전히 동일하므로 아래처럼 줄여쓸 수 있다.
+             *  !! students.forEach(printStudentInfo);
+             */
+        };
+        // 이건 내 풀이
+        const printAverage = ([name, gender, ...scores]) => {
+            sum = scores.reduce((partialSum, score) => {
+                return (partialSum += Number(score));
+            }, 0);
+
+            console.log(
+                `${name}(${gender})의 평균: ${
+                    Math.round((sum / scores.length) * 10) / 10
+                }점`
+            );
+        };
+
+        const printStudentInfo = ([name, gender, ...scores]) => {
+            const sum = scores
+                .map((n) => Number(n))
+                .reduce((partialSum, score) => partialSum + score);
+            const avg = Math.round((sum / scores.length) * 10) / 10;
+            console.log(`${name}(${gender}) - ${avg}점`);
+        };
+    </script>
+
+    <hr />
+    <h2>객체</h2>
+    <button onclick="test2()">실행</button>
+    <script>
+        /**
+         * 객체의 속성값을 변수에 쉽게 옮겨담는 문법
+         */
+        const test2 = () => {
+            const obj = {
+                id: 1234135,
+                username: {
+                    firstname: "길동",
+                    lastname: "홍",
+                },
+                sns: ["facebook", "instagram", "twitter"],
+            };
+
+            const id_ = obj.id;
+            const name_ = obj.username;
+            const address_ = obj.address ?? "서울시 강남구";
+            console.log(username_.firstname_, address_);
+            // 위에처럼 했어야 했던거를 아래처럼 할 수 있다.
+            const { id, username, address = "서울시 강남구" } = obj;
+            console.log(username.firstname, address);
+
+            const {
+                username: { firstname, lastname },
+            } = obj;
+            // 이렇게하면 username.firstname으로 접근하는게 아니라 바로 firstname으로 접근한다.
+            // 따라서 username은 이 스코프에서 존재하지 않는다. 라기보다 애초에 선언된 것이 아니다.
+            console.log(firstname);
+            console.log(lastname);
+
+            // 아래처럼하면 변수명을 바꿔서 쓸 수 있다.
+            const { id: userId } = obj;
+            console.log(userId);
+
+            const {
+                sns: [f, i, t],
+            } = obj;
+            console.log(f, i, t);
+
+            // 함수 리턴
+            // 이라기보단 함수의 리턴값
+            console.log("함수의 리턴값");
+            const { memberId, cash } = qoo();
+            console.log(memberId, cash);
+
+            // 인자로 객체를 전달하는 경우
+            console.log("함수에 객체를 인자로 전달");
+            kar(obj);
+
+            // 정보 안내 함수: 객체의 해당 내용만 출력
+            // kh는 kh정보를 담은 객체
+
+            kh = getKHInfo();
+            console.log(kh);
+
+            sayUrl(kh);
+            sayTel(kh);
+            sayAddr(kh, "강남");
+            sayAddr(kh, "갱냄");
+        };
+
+        const qoo = () => {
+            return {
+                memberId: "sinsa",
+                tel: "01012341234",
+                married: true,
+                cash: 1000000,
+            };
+        };
+
+        const kar = ({ id, username, ...rest }) => {
+            console.log(id, username);
+            console.log(rest);
+        };
+
+        /**
+         * ! 객체를 리턴하는 경우에는 함수 몸통부 brackets인지 객체의 brackets인지 모르므로 parentheses로 감싸주기
+         */
+        const getKHInfo = () => ({
+            url: "https://iei.or.kr",
+            tel: ["070-1234-1234", "070-3333-5555", "070-234-4567"],
+            addr: {
+                강남: "서울시 강남구",
+                종로: "서울시 종로구",
+                당산: "서울시 영등포구",
+            },
+        });
+
+        const sayUrl = ({ url }) => {
+            console.log(`문의하신 url은 ${url}`);
+        };
+        const sayTel = ({ tel }) => {
+            console.log(`문의하신 전화번호는 ${tel}입니다.`);
+        };
+        const sayAddr = ({ addr }, query) => {
+            const result = addr[query];
+            if (result)
+                console.log(`문의하신 ${query}지원은 ${result}에 위치합니다.`);
+            else console.log(`문의하신 ${query}지원은 존재하지 않습니다.`);
+        };
+    </script>
+    <hr />
+    <h2>가족정보</h2>
+    <button onclick="test3();">실행</button>
+    <script>
+        /**
+         * 두 회원의 가족정보는 다음과 같다.
+         * 한명의 회원정보를 출력하는 printFamilyInfo를 사용하여 아래와 같이 출력
+         *  - 본인: 홍길동, 부:홍기만, 모:이영희, 형제:홍진경
+         *  - 본인: 유관순, 부:유재석, 모:강진희, 형제:유희열
+         */
+        const test3 = () => {
+            const people = [
+                {
+                    name: "홍길동",
+                    family: {
+                        father: "홍기만",
+                        mother: "이영희",
+                        sister: "홍진경",
+                        // brother: "뭐지",
+                    },
+                },
+                {
+                    name: "유관순",
+                    family: {
+                        father: "유재석",
+                        mother: "강진희",
+                        brother: "유희열",
+                        // sister: "두번쨰",
+                    },
+                },
+            ];
+
+            // people.forEach((person) => printFamilyInfo(person));
+            // 이렇게 person => person인 경우 아래처럼 생략가능
+            people.forEach(printFamilyInfo);
+        };
+
+        const printFamilyInfo = ({
+            name: me,
+            family: { father: dad, mother: mom, sister: sis, brother: bro },
+        }) => {
+            const sibling = sis ?? (sis = bro);
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_nullish_assignment
+            console.log(`본인:${me}, 부:${dad}, 모:${mom}, 형제:${sibling}`);
+        };
+    </script>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>실습문제_객체</title>
+    </head>
+    <body>
+        <h3>@실습문제</h3>
+        <img src="실습문제_객체_성적테이블.png" />
+        <img src="실습문제_객체_1_콘솔출력.png" />
+        <p>
+            1. 위 성적자료를 바탕으로 학생객체를 생성해서 콘솔에 출력하세요.
+            <br />
+            각 객체에 총합을 구하는 속성 getSum메소드, 평균을 구하는 속성
+            getAvg메소드(소수점첫째자리까지), 학생정보를 출력하는 속성 info을
+            추가하고, 콘솔에 info메소드를 이용해 다음과 같이 출력하세요.
+        </p>
+        <script>
+            function Student(name, java, oracle, html5, css3, javascript) {
+                this.name = name;
+                this.java = java;
+                this.oracle = oracle;
+                this.html5 = html5;
+                this.css3 = css3;
+                this.javascript = javascript;
+                this.scores = [java, oracle, html5, css3, javascript];
+                this.subject = {
+                    java: java,
+                    oracle: oracle,
+                    html5: html5,
+                    css3: css3,
+                    javascript: javascript,
+                };
+                this.getSum2 = function () {
+                    return (
+                        this.subject.java +
+                        this.subject.oracle +
+                        this.subject.html5 +
+                        this.subject.css3 +
+                        this.subject.javascript
+                    );
+                };
+
+                this.getAvg2 = function () {
+                    for (const subject in this.subject)
+                        console.log(this.subject[subject]);
+                };
+                this.getSum = function () {
+                    return this.scores
+                        .map((elem) => Number(elem))
+                        .reduce((partialSum, elem) => {
+                            return partialSum + elem;
+                        });
+                };
+                this.getAvg = function () {
+                    return (
+                        Math.round((this.getSum() / this.scores.length) * 10) /
+                        10
+                    );
+                };
+                this.toString = function () {
+                    return `이름=${name}, java=${java}, oracle=${oracle}, html5=${html5}, css3=${css3}, javascript=${javascript}, 총점:${this.getSum()} 평점:${this.getAvg()}`;
+                };
+                this.info = function () {
+                    console.log(this.toString());
+                };
+            }
+
+            const students = [
+                new Student("김동현", "90", "56", "56", "45", "34"),
+                new Student("홍길동", "45", "76", "34", "33", "56"),
+                new Student("유관순", "76", "34", "54", "56", "22"),
+            ];
+            // 점수가 숫자일 때랑 문자열일 때랑
+            const students2 = [
+                new Student("김동현", 90, 56, 56, 45, 34),
+                new Student("홍길동", 45, 76, 34, 33, 56),
+                new Student("유관순", 76, 34, 54, 56, 22),
+            ];
+            students.forEach((student) => student.info());
+            students2.forEach((student) => console.log(student.getSum2()));
+            students2.forEach((student) => console.log(student.getAvg2()));
+        </script>
+    </body>
+</html>

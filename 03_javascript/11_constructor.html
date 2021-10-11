@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>constructor</title>
+    </head>
+    <body>
+        <h1>constructor</h1>
+        <button onclick="test1();">객체배열</button>
+        <button onclick="test2();">생성자 함수</button>
+
+        <script>
+            /**
+             * 객체를 배열에 담아 제어하기
+             */
+            const test1 = () => {
+                const pets = [
+                    {
+                        name: "구리구리",
+                        breed: "푸들",
+                        weight: 3,
+                    },
+                    {
+                        name: "둘리",
+                        breed: "말티즈",
+                        weight: 6,
+                    },
+                    {
+                        name: "사랑이",
+                        breed: "코카스파니엘",
+                        weight: 13,
+                    },
+                ];
+
+                pets.forEach((pet) => {
+                    // ! 동적으로 메소드 추가
+                    pet.bark = () => {
+                        return pet.weight > 10 ? "멍멍" : "왈왈";
+                    };
+                    const { name, breed, weight, bark } = pet;
+                    console.log(
+                        `이름: ${name}, 견종: ${breed}, 몸무게: ${weight}kg, 소리: ${bark()}`
+                    );
+                });
+            };
+
+            const test2 = () => {
+                const pet = new Pet("구리구리", "푸들", 3);
+                console.log(pet);
+
+                const pets = [
+                    new Pet("구리구리", "푸들", 3),
+                    new Pet("둘리", "말티즈", 6),
+                    new Pet("사랑이", "코카스파니엘", 13),
+                ];
+
+                console.log("+++++++++++++++++++++++++++++++");
+
+                for (const i in pets) {
+                    let { name, breed, weight, bark } = pets[i];
+                    // 메소드였던 애를 함수처럼 쓰려고 해서 문제 발생
+                    // losing this
+                    // this를 바인딩(binding) 처리해야 한다.
+                    bark = bark.bind(pets[i]);
+                    console.log(name, breed, weight, bark());
+                    // 바인드를 안하면 아래처럼 해야한다.
+                    console.log(
+                        pets[i].name,
+                        pets[i].breed,
+                        pets[i].weight,
+                        pets[i].bark()
+                    );
+                }
+
+                console.log("=========================");
+                for (const pet of pets) {
+                    let { name, breed, weight, bark } = pet;
+                    console.log(name, breed, weight, bark.bind(pet)());
+                    // bark에 대해선 위나 아래처럼 해야한다.
+                    console.log(name, breed, weight, pet.bark());
+                }
+            };
+            /**
+             * 생성자 함수명은 대문자로 시작
+             * 생성자 함수는 new 연산자와 함게 호출되는 함수
+             * this 용법 4: 생성자 함수 안의 this는 현재객체를 가리킨다.
+             */
+
+            function Pet(name, breed, weight) {
+                this.name = name;
+                this.breed = breed;
+                this.weight = weight;
+                this.bark = function () {
+                    // console.log(this.weight);
+                    return this.weight > 10 ? "멍멍" : "왈왈";
+                };
+            }
+        </script>
+    </body>
+</html>

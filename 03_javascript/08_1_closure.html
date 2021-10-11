@@ -14,13 +14,13 @@
         <button onclick="test12()">test12() 실행</button>
 
         <script>
-            const weather = "오늘은 비가 온다~";
             /**
              * 자유변수
              * - 지역 scope에 선언되지 않은 변수
              * - 전역변수가 항상 자유변수는 아니다 nested function일 때, 예외이기 때문
              */
 
+            const weather = "오늘은 비가 온다~";
             const test11 = (name) => {
                 const greeting = "안녕";
                 const say = `${greeting}, ${name}! ${weather}~`; // 여기서 weather가 자유변수다(지역 scope 밖)
@@ -50,7 +50,7 @@
                 const num = 200;
                 const too = foo(); // too는 자유변수 num을 자체적으로 가지고 있다.
                 console.log(too, typeof too);
-                console.dir(too); // devtool에서 [[Scopes]]를 참조하면 Closure에 num이 있다.
+                console.dir(too); // devtool에서 [[Scopes]]를 참조하면 Closure에 num이 있다. (200인 num이 아니라 100인 num)
                 too();
                 // num의 이름을 변경해서도 생각해보자
             };
