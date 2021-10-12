@@ -1,6 +1,9 @@
 <html>
     <head></head>
     <body>
+        <button onclick="test1();">실행</button>
+        <button onclick="test2();">Frontend 과목점수</button>
+        "Frontend 과목점수"를 누르기 전까진 "실행"이 정상작동하지 않는다.
         <script>
             function Student(name, java, oracle, html5, css3, javascript) {
                 this.name = name;
@@ -12,24 +15,31 @@
                     javascript: javascript,
                 };
 
-                this.getSum = function () {
-                    return (
-                        this.subject.java +
-                        this.subject.oracle +
-                        this.subject.html5 +
-                        this.subject.css3 +
-                        this.subject.javascript
-                    );
-                };
+                // this.getSum = function () {
+                //     return (
+                //         this.subject.java +
+                //         this.subject.oracle +
+                //         this.subject.html5 +
+                //         this.subject.css3 +
+                //         this.subject.javascript
+                //     );
+                // };
 
-                this.getAvg = function () {
-                    let count = 0;
-                    for (const subject in this.subject) {
-                        console.log(subject, this.subject[subject]);
-                        count++;
-                    }
-                    return this.getSum() / count;
-                };
+                // this.getAvg = function () {
+                //     let count = 0;
+                //     for (const subject in this.subject) {
+                //         // console.log(subject, this.subject[subject]);
+                //         count++;
+                //     }
+                //     return this.getSum() / count;
+                // };
+
+                // this.toString = function () {
+                // return `이름=${name}, java=${java}, oracle=${oracle}, html5=${html5}, css3=${css3}, javascript=${javascript}, 총점:${this.getSum()} 평점:${this.getAvg()}`;
+                // };
+                // this.info = function () {
+                // console.log(this.toString());
+                // };
             }
 
             const students = [
@@ -37,8 +47,60 @@
                 new Student("홍길동", 45, 76, 34, 33, 56),
                 new Student("유관순", 76, 34, 54, 56, 22),
             ];
+            const test1 = () => {
+                // students.forEach((student) => console.log(student.getAvg()));
+                students.forEach((student) => student.info());
+                ////////////////////////////////////////////
+                students.forEach((student) => {
+                    console.log(student.getFrontLangSum());
+                    console.log(student.getFrontLangAvg());
+                });
+            };
+            ////////////////////////////////
+            const test2 = () => {
+                Student.prototype.getFrontLangSum = function () {
+                    return (
+                        this.subject.html5 +
+                        this.subject.css3 +
+                        this.subject.javascript
+                    );
+                };
+                Student.prototype.getFrontLangAvg = function () {
+                    return Math.round((this.getFrontLangSum() / 3) * 10) / 10;
+                };
 
-            students.forEach((student) => console.log(student.getAvg()));
+                Student.prototype.getSum = function () {
+                    return (
+                        this.getFrontLangSum() +
+                        this.subject.java +
+                        this.subject.oracle
+                    );
+                };
+
+                Student.prototype.getAvg = function () {
+                    return Math.round((this.getSum() / 5) * 10) / 10;
+                };
+
+                Student.prototype.toString = function () {
+                    return `이름=${this.name}, java=${
+                        this.subject.java
+                    }, oracle=${this.subject.oracle}, html5=${
+                        this.subject.html5
+                    }, css3=${this.subject.css3}, javascript=${
+                        this.subject.javascript
+                    }, 총점:${this.getSum()} 평점:${this.getAvg()}`;
+                };
+                Student.prototype.info = function () {
+                    console.log(this.toString());
+                };
+                // Student.prototype.info = function () {
+                //     console.log(this.toString());
+                // };               const students = [
+                //         new Student("김동현", 90, 56, 56, 45, 34),
+                //         new Student("홍길동", 45, 76, 34, 33, 56),
+                //         new Student("유관순", 76, 34, 54, 56, 22),
+                //     ];
+            };
         </script>
     </body>
 </html>

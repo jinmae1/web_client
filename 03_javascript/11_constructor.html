@@ -79,7 +79,7 @@
                     let { name, breed, weight, bark } = pet;
                     console.log(name, breed, weight, bark.bind(pet)());
                     // bark에 대해선 위나 아래처럼 해야한다.
-                    console.log(name, breed, weight, pet.bark());
+                    console.log(name, breed, weight, pet.bark(), pet.meow());
                 }
             };
             /**
@@ -97,6 +97,17 @@
                     return this.weight > 10 ? "멍멍" : "왈왈";
                 };
             }
+
+            /**
+             * js는 prototype을 이용해서 객체모델을 제공한다.
+             * 해당 생성자 함수의 prototype 속성을 이용해 객체에 접근, 속성을 추가할 수 있다.
+             * 이 추가된 속성은 모든 자식객체에서 사용가능하다.
+             */
+
+            Pet.prototype.meow = function () {
+                // console.log(this.weight);
+                return this.weight > 10 ? "야옹" : "찍찍";
+            };
         </script>
     </body>
 </html>
