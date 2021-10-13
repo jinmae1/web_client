@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>data-attr</title>
+    </head>
+    <body>
+        <h1>data-attr</h1>
+        <!-- data attr에서 속성이름이 어떻게 바뀌는지 주의하기 -->
+        <p
+            id="myp"
+            data-length="1800"
+            data-index-number_hi="1234"
+            data-writerName="홍길동"
+        >
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum
+            mollitia quasi, harum hic et natus sed magni. Sunt molestias
+            perferendis rem alias odit? Enim alias est voluptatibus sapiente
+            facere totam!
+        </p>
+        <button id="btn1">실행</button>
+        <button id="btn2">실행</button>
+        <script>
+            /**
+             * setter
+             */
+            btn1.onclick = (e) => {
+                console.log(myp.dataset);
+            };
+            /**
+             * getter
+             */
+            btn2.onclick = (e) => {
+                myp.dataset.length = 2000;
+                myp.dataset.indexNumber = 5678;
+                // 없던 값도 추가할 수 있다.
+                myp.dataset.chocolate = "abc";
+            };
+        </script>
+    </body>
+</html>
