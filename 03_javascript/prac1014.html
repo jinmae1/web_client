@@ -76,18 +76,8 @@
                 <tr>
                     <th>주민번호<span class="req">*</span></th>
                     <td>
-                        <input
-                            type="text"
-                            name="ssn1"
-                            id="ssn1"
-                            class="short"
-                        />-
-                        <input
-                            type="password"
-                            name="ssn2"
-                            id="ssn2"
-                            class="short"
-                        />
+                        <input type="text" name="ssn1" id="ssn1" class="short" />-
+                        <input type="password" name="ssn2" id="ssn2" class="short" />
                     </td>
                 </tr>
                 <tr>
@@ -99,24 +89,9 @@
                 <tr>
                     <th>전화번호<span class="req">*</span></th>
                     <td>
-                        <input
-                            type="text"
-                            name="tel1"
-                            id="tel1"
-                            class="phone"
-                        />-
-                        <input
-                            type="text"
-                            name="tel2"
-                            id="tel2"
-                            class="phone"
-                        />-
-                        <input
-                            type="text"
-                            name="tel3"
-                            id="tel3"
-                            class="phone"
-                        />
+                        <input type="text" name="tel1" id="tel1" class="phone" />-
+                        <input type="text" name="tel2" id="tel2" class="phone" />-
+                        <input type="text" name="tel3" id="tel3" class="phone" />
                     </td>
                 </tr>
                 <tr>
@@ -132,40 +107,15 @@
                 <tr>
                     <th>취미</th>
                     <td>
-                        <input
-                            type="checkbox"
-                            name="hobby"
-                            id="hobby1"
-                            value="reading"
-                        />
+                        <input type="checkbox" name="hobby" id="hobby1" value="reading" />
                         <label for="hobby1">독서</label>
-                        <input
-                            type="checkbox"
-                            name="hobby"
-                            id="hobby2"
-                            value="development"
-                        />
+                        <input type="checkbox" name="hobby" id="hobby2" value="development" />
                         <label for="hobby2">개발</label>
-                        <input
-                            type="checkbox"
-                            name="hobby"
-                            id="hobby3"
-                            value="exercise"
-                        />
+                        <input type="checkbox" name="hobby" id="hobby3" value="exercise" />
                         <label for="hobby3">운동</label>
-                        <input
-                            type="checkbox"
-                            name="hobby"
-                            id="hobby4"
-                            value="game"
-                        />
+                        <input type="checkbox" name="hobby" id="hobby4" value="game" />
                         <label for="hobby4">게임</label>
-                        <input
-                            type="checkbox"
-                            name="hobby"
-                            id="hobby5"
-                            value="movie"
-                        />
+                        <input type="checkbox" name="hobby" id="hobby5" value="movie" />
                         <label for="hobby5">영화</label>
                     </td>
                 </tr>
@@ -214,14 +164,10 @@
                 const areAlphabetic = /[A-Za-z]/g;
                 const isLowerCase = /[a-z]/;
 
-                if (!matchesLength.test(userId.value))
-                    return alert("아이디의 길이는 4~12자리여아 합니다.");
-                if (!containsDigit.test(userId.value))
-                    return alert("숫자를 포함해야 합니다.");
-                if (!areAlphabetic.test(userId.value))
-                    return alert("영문자와 숫자로 이루어져야합니다.");
-                if (!isLowerCase.test(userId.value))
-                    return alert("첫 글자는 영소문자로 시작해야 합니다.");
+                if (!matchesLength.test(userId.value)) return alert("아이디의 길이는 4~12자리여아 합니다.");
+                if (!containsDigit.test(userId.value)) return alert("숫자를 포함해야 합니다.");
+                if (!areAlphabetic.test(userId.value)) return alert("영문자와 숫자로 이루어져야합니다.");
+                if (!isLowerCase.test(userId.value)) return alert("첫 글자는 영소문자로 시작해야 합니다.");
                 return true;
             };
 
@@ -230,46 +176,30 @@
                 const hasValidSpecialChars = /[*!&]/;
                 const areAlphanuremic = /[A-Za-z0-9]/g;
 
-                if (!matchesLength.test(pwd.value))
-                    return alert("비밀번호의 길이는 8~15자리여아 합니다.");
-                if (!hasValidSpecialChars.test(pwd.value))
-                    return alert(
-                        "특수문자(* ! &) 중 하나 이상을 포함해야 합니다."
-                    );
-                if (!areAlphanuremic.test(pwd.value))
-                    return alert(
-                        "영대소문자와 숫자, 특수문자로 이루어져야 합니다."
-                    );
+                if (!matchesLength.test(pwd.value)) return alert("비밀번호의 길이는 8~15자리여아 합니다.");
+                if (!hasValidSpecialChars.test(pwd.value)) return alert("특수문자(* ! &) 중 하나 이상을 포함해야 합니다.");
+                if (!areAlphanuremic.test(pwd.value)) return alert( "영대소문자와 숫자, 특수문자로 이루어져야 합니다.");
                 return true;
             };
 
-            const validatePasswordCheck = ({ target = pwdCheck }) => {
-                return pwd.value === pwdCheck.value
-                    ? true
-                    : alert("비밀번호가 일치하지 않습니다.");
-            };
+            const validatePasswordCheck = ({ target = pwdCheck }) => pwd.value === pwdCheck.value ? true : alert("비밀번호가 일치하지 않습니다.");
 
             const validateName = ({ target = userName }) => {
                 const matchesLength = /^.{2,}$/;
                 const areHanguls = /[가-힣]/g;
 
-                if (!matchesLength.test(userName.value))
-                    return alert("이름은 두 글자 이상이어야 합니다.");
-                if (!areHanguls.test(userName.value))
-                    return alert("이름은 한글로 이루어져야 합니다.");
+                if (!matchesLength.test(userName.value)) return alert("이름은 두 글자 이상이어야 합니다.");
+                if (!areHanguls.test(userName.value)) return alert("이름은 한글로 이루어져야 합니다.");
                 return true;
             };
 
             const validateSSN1 = ({ target = ssn1 }) => {
                 const matchesLength = /^\d{6}$/;
                 const areDigits = /\d/g;
-                const isValidForm =
-                    /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
+                const isValidForm = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 
-                if (!matchesLength.test(ssn1.value))
-                    return alert("주민번호 앞자리는 숫자 6자리입니다.");
-                if (!isValidForm.test(ssn1.value))
-                    return alert("생년월일의 형식에 맞지 않습니다.");
+                if (!matchesLength.test(ssn1.value)) return alert("주민번호 앞자리는 숫자 6자리입니다.");
+                if (!isValidForm.test(ssn1.value)) return alert("생년월일의 형식에 맞지 않습니다.");
                 return true;
             };
 
@@ -277,10 +207,8 @@
                 const matchesLength = /^\d{7}$/;
                 const isValidForm = /^[1-4]\d{6}$/;
 
-                if (!matchesLength.test(ssn2.value))
-                    return alert("주민번호 뒷자리는 숫자 7자리입니다.");
-                if (!isValidForm.test(ssn2.value))
-                    return alert("주민번호 뒷자리의 형식에 맞지 않습니다.");
+                if (!matchesLength.test(ssn2.value)) return alert("주민번호 뒷자리는 숫자 7자리입니다.");
+                if (!isValidForm.test(ssn2.value)) return alert("주민번호 뒷자리의 형식에 맞지 않습니다.");
                 return true;
             };
 
@@ -288,12 +216,8 @@
                 const matchesLength = /^[A-Za-z0-9]{4,12}/;
                 const hasDomain = /(?<=@)\w+\.\w+$/;
 
-                if (!matchesLength.test(email.value))
-                    return alert(
-                        "이메일 주소의 아이디는\n영대소문자, 숫자로 이루어진\n4~12자리여야합니다."
-                    );
-                if (!hasDomain.test(email.value))
-                    return alert("이메일 형식에 맞지 않습니다.");
+                if (!matchesLength.test(email.value)) return alert( "이메일 주소의 아이디는\n영대소문자, 숫자로 이루어진\n4~12자리여야합니다.");
+                if (!hasDomain.test(email.value)) return alert("이메일 형식에 맞지 않습니다.");
                 return true;
             };
 
@@ -301,22 +225,10 @@
                 const isOver3Digits = /^\d{3,}$/;
                 const areDigits = /\d/g;
 
-                if (
-                    !(
-                        areDigits.test(tel1.value) ||
-                        areDigits.test(tel2.value) ||
-                        areDigits.test(tel3.value)
-                    )
-                )
-                    return alert("전화번호는 숫자여야 합니다.");
-                if (tel1.value !== "010")
-                    return alert("전화번호의 첫 자리는 010이어야합니다.");
-                if (!isOver3Digits.test(tel2.value))
-                    return alert(
-                        "전화번호의 두 번째 자리는 3자리 이상이어야 합니다."
-                    );
-                if (tel3.value.length !== 4)
-                    return alert("전화번호의 세 번째 자리는 4자리여야합니다.");
+                if ( !( areDigits.test(tel1.value) || areDigits.test(tel2.value) || areDigits.test(tel3.value))) return alert("전화번호는 숫자여야 합니다.");
+                if (tel1.value !== "010") return alert("전화번호의 첫 자리는 010이어야합니다.");
+                if (!isOver3Digits.test(tel2.value)) return alert( "전화번호의 두 번째 자리는 3자리 이상이어야 합니다.");
+                if (tel3.value.length !== 4) return alert("전화번호의 세 번째 자리는 4자리여야합니다.");
                 return true;
             };
         </script>
