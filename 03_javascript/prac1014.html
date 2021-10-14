@@ -214,26 +214,14 @@
                 const areAlphabetic = /[A-Za-z]/g;
                 const isLowerCase = /[a-z]/;
 
-                if (!matchesLength.test(userId.value)) {
-                    alert("아이디의 길이는 4~12자리여아 합니다.");
-                    return;
-                }
-
-                if (!containsDigit.test(userId.value)) {
-                    alert("숫자를 포함해야 합니다.");
-                    return;
-                }
-
-                if (!areAlphabetic.test(userId.value)) {
-                    alert("영문자와 숫자로 이루어져야합니다.");
-                    return;
-                }
-
-                if (!isLowerCase.test(userId.value)) {
-                    alert("첫 글자는 영소문자로 시작해야 합니다.");
-                    return;
-                }
-
+                if (!matchesLength.test(userId.value))
+                    return alert("아이디의 길이는 4~12자리여아 합니다.");
+                if (!containsDigit.test(userId.value))
+                    return alert("숫자를 포함해야 합니다.");
+                if (!areAlphabetic.test(userId.value))
+                    return alert("영문자와 숫자로 이루어져야합니다.");
+                if (!isLowerCase.test(userId.value))
+                    return alert("첫 글자는 영소문자로 시작해야 합니다.");
                 return true;
             };
 
@@ -242,21 +230,16 @@
                 const hasValidSpecialChars = /[*!&]/;
                 const areAlphanuremic = /[A-Za-z0-9]/g;
 
-                if (!matchesLength.test(pwd.value)) {
-                    alert("비밀번호의 길이는 8~15자리여아 합니다.");
-                    return;
-                }
-
-                if (!hasValidSpecialChars.test(pwd.value)) {
-                    alert("특수문자(* ! &) 중 하나 이상을 포함해야 합니다.");
-                    return;
-                }
-
-                if (!areAlphanuremic.test(pwd.value)) {
-                    alert("영대소문자와 숫자, 특수문자로 이루어져야 합니다.");
-                    return;
-                }
-
+                if (!matchesLength.test(pwd.value))
+                    return alert("비밀번호의 길이는 8~15자리여아 합니다.");
+                if (!hasValidSpecialChars.test(pwd.value))
+                    return alert(
+                        "특수문자(* ! &) 중 하나 이상을 포함해야 합니다."
+                    );
+                if (!areAlphanuremic.test(pwd.value))
+                    return alert(
+                        "영대소문자와 숫자, 특수문자로 이루어져야 합니다."
+                    );
                 return true;
             };
 
@@ -270,16 +253,10 @@
                 const matchesLength = /^.{2,}$/;
                 const areHanguls = /[가-힣]/g;
 
-                if (!matchesLength.test(userName.value)) {
-                    alert("이름은 두 글자 이상이어야 합니다.");
-                    return;
-                }
-
-                if (!areHanguls.test(userName.value)) {
-                    alert("이름은 한글로 이루어져야 합니다.");
-                    return;
-                }
-
+                if (!matchesLength.test(userName.value))
+                    return alert("이름은 두 글자 이상이어야 합니다.");
+                if (!areHanguls.test(userName.value))
+                    return alert("이름은 한글로 이루어져야 합니다.");
                 return true;
             };
 
@@ -289,30 +266,21 @@
                 const isValidForm =
                     /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 
-                if (!matchesLength.test(ssn1.value)) {
-                    alert("주민번호 앞자리는 숫자 6자리입니다.");
-                    return;
-                }
-
-                if (!isValidForm.test(ssn1.value)) {
-                    alert("생년월일의 형식에 맞지 않습니다.");
-                    return;
-                }
-
+                if (!matchesLength.test(ssn1.value))
+                    return alert("주민번호 앞자리는 숫자 6자리입니다.");
+                if (!isValidForm.test(ssn1.value))
+                    return alert("생년월일의 형식에 맞지 않습니다.");
                 return true;
             };
+
             const validateSSN2 = ({ target = ssn2 }) => {
                 const matchesLength = /^\d{7}$/;
                 const isValidForm = /^[1-4]\d{6}$/;
 
-                if (!matchesLength.test(ssn2.value)) {
-                    alert("주민번호 뒷자리는 숫자 7자리입니다.");
-                    return;
-                }
-                if (!isValidForm.test(ssn2.value)) {
-                    alert("주민번호 뒷자리의 형식에 맞지 않습니다.");
-                    return;
-                }
+                if (!matchesLength.test(ssn2.value))
+                    return alert("주민번호 뒷자리는 숫자 7자리입니다.");
+                if (!isValidForm.test(ssn2.value))
+                    return alert("주민번호 뒷자리의 형식에 맞지 않습니다.");
                 return true;
             };
 
@@ -320,18 +288,12 @@
                 const matchesLength = /^[A-Za-z0-9]{4,12}/;
                 const hasDomain = /(?<=@)\w+\.\w+$/;
 
-                if (!matchesLength.test(email.value)) {
-                    alert(
+                if (!matchesLength.test(email.value))
+                    return alert(
                         "이메일 주소의 아이디는\n영대소문자, 숫자로 이루어진\n4~12자리여야합니다."
                     );
-                    return;
-                }
-
-                if (!hasDomain.test(email.value)) {
-                    alert("이메일 형식에 맞지 않습니다.");
-                    return;
-                }
-
+                if (!hasDomain.test(email.value))
+                    return alert("이메일 형식에 맞지 않습니다.");
                 return true;
             };
 
@@ -345,26 +307,16 @@
                         areDigits.test(tel2.value) ||
                         areDigits.test(tel3.value)
                     )
-                ) {
-                    alert("전화번호는 숫자여야 합니다.");
-                    return;
-                }
-
-                if (tel1.value !== "010") {
-                    alert("전화번호의 첫 자리는 010이어야합니다.");
-                    return;
-                }
-
-                if (!isOver3Digits.test(tel2.value)) {
-                    alert("전화번호의 두 번째 자리는 3자리 이상이어야 합니다.");
-                    return;
-                }
-
-                if (tel3.value.length !== 4) {
-                    alert("전화번호의 세 번째 자리는 4자리여야합니다.");
-                    return;
-                }
-
+                )
+                    return alert("전화번호는 숫자여야 합니다.");
+                if (tel1.value !== "010")
+                    return alert("전화번호의 첫 자리는 010이어야합니다.");
+                if (!isOver3Digits.test(tel2.value))
+                    return alert(
+                        "전화번호의 두 번째 자리는 3자리 이상이어야 합니다."
+                    );
+                if (tel3.value.length !== 4)
+                    return alert("전화번호의 세 번째 자리는 4자리여야합니다.");
                 return true;
             };
         </script>
