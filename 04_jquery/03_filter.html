@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>filter</title>
+        <script src="js/jquery-3.6.0.js"></script>
+    </head>
+    <body>
+        <h1>filter</h1>
+        <div class="wrapper">
+            <p id="p1">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Voluptatum exercitationem iure suscipit quaerat esse dolorum
+                nostrum, obcaecati, nam laudantium, possimus ad! Provident
+                fugiat quibusdam iusto eius facere earum veritatis praesentium?
+            </p>
+            <p id="p2">
+                Accusantium mollitia, quo minus accusamus quibusdam, cupiditate
+                dolores, unde tempora est perferendis magni pariatur repellendus
+                facere officiis illo aliquid autem odit et. Nobis incidunt vitae
+                facere inventore hic beatae soluta!
+            </p>
+            <p id="p3">
+                Ex ut reprehenderit delectus nisi, quibusdam expedita similique,
+                quos fuga exercitationem consequatur, repellendus blanditiis.
+                Accusantium cumque nam obcaecati ipsam aliquid magnam? Nemo
+                debitis et eum magnam doloribus cum labore facilis.
+            </p>
+            <p id="p4">
+                Quasi iure harum corrupti, doloremque nisi dignissimos laborum
+                amet molestias quis nam quas veniam consequatur aliquam dolores
+                eligendi hic consequuntur tempora deleniti eos natus? Aut et
+                delectus officiis doloribus numquam!
+            </p>
+            <p id="p5">
+                Magni eveniet odio, quod neque sit incidunt! Laboriosam fuga
+                illum, id nam qui deserunt modi tenetur quae ipsa, iure ut eum
+                molestiae soluta quos magni veritatis saepe explicabo aut rerum?
+            </p>
+        </div>
+        <script>
+            const $plist = $(".wrapper p");
+            console.log($plist.filter(":even"));
+
+            // jQuery의 반환값이 대부분 또 한번 jQuery객체이므로 method chaining 가능
+            $plist
+                .css("color", "lightgreen")
+                .filter(":even")
+                .css("color", "white")
+                .css("backgroundColor", "skyblue")
+                .filter(":last")
+                .css("fontSize", "2em")
+                .end()
+                .filter(":first")
+                .css("background-color", "lightpink"); // 필터하기 한 단계 전으로 돌아감
+        </script>
+        <hr />
+        <hr />
+        <div class="wrapper2">
+            <p id="q1">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Voluptatum exercitationem iure suscipit quaerat esse dolorum
+                nostrum, obcaecati, nam laudantium, possimus ad! Provident
+                fugiat quibusdam iusto eius facere earum veritatis praesentium?
+            </p>
+            <p id="q2">
+                Accusantium mollitia, quo minus accusamus quibusdam, cupiditate
+                dolores, unde tempora est perferendis magni pariatur repellendus
+                facere officiis illo aliquid autem odit et. Nobis incidunt vitae
+                facere inventore hic beatae soluta!
+            </p>
+            <p id="q3">
+                Ex ut reprehenderit delectus nisi, quibusdam expedita similique,
+                quos fuga exercitationem consequatur, repellendus blanditiis.
+                Accusantium cumque nam obcaecati ipsam aliquid magnam? Nemo
+                debitis et eum magnam doloribus cum labore facilis.
+            </p>
+            <p id="q4">
+                Quasi iure harum corrupti, doloremque nisi dignissimos laborum
+                amet molestias quis nam quas veniam consequatur aliquam dolores
+                eligendi hic consequuntur tempora deleniti eos natus? Aut et
+                delectus officiis doloribus numquam!
+            </p>
+            <p id="q5">
+                Magni eveniet odio, quod neque sit incidunt! Laboriosam fuga
+                illum, id nam qui deserunt modi tenetur quae ipsa, iure ut eum
+                molestiae soluta quos magni veritatis saepe explicabo aut rerum?
+            </p>
+        </div>
+        <script>
+            const $qlist = $(".wrapper2 p");
+            $qlist.first().css("color", "red");
+            $qlist.not("#q1").css("textDecoration", "line-through");
+            // line-through과 같이 속성 값은 lineThrough처럼 camelCase로 쓸 수 없다.
+
+            // 이런식으로 요소에 접근하면 jQuery객체가 아니라 js객체다.
+            console.log($qlist[2]);
+            console.log($qlist.get(2));
+            console.log($qlist.eq(2)[0]);
+            // 얘는 순수 배열이 나온다.
+            console.log($qlist.get());
+        </script>
+    </body>
+</html>

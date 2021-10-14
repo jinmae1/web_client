@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>attr | prop</title>
+        <script src="js/jquery-3.6.0.js"></script>
+    </head>
+    <style>
+        .img-wrapper {
+            text-align: center;
+        }
+        .img-wrapper img {
+            width: 300px;
+            margin: 10px;
+        }
+    </style>
+    <body>
+        <h1>attr | prop</h1>
+        <button id="btn1">attr</button>
+        <div class="img-wrapper">
+            <img src="../sample/image/flower1.PNG" alt="" width="300px" />
+            <img src="../sample/image/flower2.PNG" alt="" width="300px" />
+        </div>
+        <hr />
+
+        <fieldset>
+            <legend>차량타입</legend>
+            <select name="car-type" id="car-type">
+                <option value="경차">경차</option>
+                <option value="소형" selected>소형</option>
+                <option value="중형">중형</option>
+                <option value="대형">대형</option>
+            </select>
+            <button id="btn2">prop</button>
+        </fieldset>
+
+        <script>
+            /**
+             * attr
+             * - html 문서에 작성된 속성에 대한 getter/setter 제공
+             */
+
+            $(btn1).click((e) => {
+                const $imgs = $(".img-wrapper img");
+                console.log($imgs);
+
+                // getter: 첫번째 요소의 값을 리턴
+                console.log($imgs.attr("src"));
+
+                // setter: 모든 요소의 값을 변환
+                $imgs
+                    .attr("src", "../sample/image/hyunta.jpg")
+                    .attr("width", "200px")
+                    .attr("height", "200px");
+                // 상동
+                $imgs.attr({
+                    str: "../sample/image/hynta.jpg",
+                    width: "200px",
+                    height: "200px",
+                });
+
+                // 속성 제거
+                $imgs.removeAttr("height");
+                $imgs.attr("height", "");
+            });
+
+            /**
+             * prop
+             * - js 동적제어에 boolean값을 사용
+             */
+            $(btn2).click((e) => {
+                $("#car-type option").each((i, option) => {
+                    const $option = $(option);
+                    console.log($option.val(), $option.prop("selected"));
+                });
+
+                // 실제 개발자도구에서 selected값이 변경되어 보이진 않는다.
+                $("option[value=중형").prop("selected", true);
+                // $("option[value=중형").attr("selected", "selected"); // 이렇게하면 안된다.
+            });
+        </script>
+    </body>
+</html>
