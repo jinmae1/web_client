@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>traversing</title>
+        <script src="./js/jquery-3.6.0.js"></script>
+    </head>
+    <style>
+        .wrap * {
+            border: 1px solid lightgray;
+            display: block;
+            padding: 5px;
+            margin: 15px;
+            color: gray;
+        }
+        .type {
+            width: 500px;
+        }
+    </style>
+    <body>
+        <h1>traversing</h1>
+        <div class="wrap">
+            <div class="type">
+                div.type (great-grandparent)
+                <ul>
+                    ul (grandparent)
+                    <li>
+                        li (direct parent)
+                        <span>span1</span>
+                    </li>
+                    <li>
+                        li (direct parent)
+                        <span>span2</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="type">
+                div.type (grandparent)
+                <p>
+                    p (direct parent)
+                    <span>span3</span>
+                </p>
+            </div>
+
+            <!-- @실습문제 -->
+            <div class="type test">
+                div.test
+                <ul>
+                    ul1
+                    <li>li1-1</li>
+                    <li>
+                        li1-2
+                        <ul>
+                            ul2
+                            <li>li2-1</li>
+                            <li>li2-2</li>
+                            <li>
+                                li2-3
+                                <ul>
+                                    ul3
+                                    <li>
+                                        li3
+                                        <span id="fromMe">fromMe</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>부모</h2>
+        <button id="btn1">직계부모</button>
+        <button id="btn2">모든조상</button>
+        <button id="btn3">특정조상 전의 모든조상</button>
+        <button id="btn4">span으로부터 ul태그 찾기</button>
+
+        <script>
+            const style = {
+                color: "red",
+                border: "2px solid red",
+            };
+            /**
+             * parent([selector])
+             * - 직계부모
+             */
+            $(btn1).click((e) => {
+                console.log($("span").parent("li").css(style));
+            });
+
+            /**
+             * parents([selector])
+             * - 모든 조상
+             */
+            $(btn2).click((e) => {
+                // body, html 까지 다 나오기 때문에 걸러줘야 함
+                console.log($("span").parents("div.type").css(style));
+            });
+
+            /**
+             * parentsUntil(selector)
+             * selector 필수
+             * selector을 지정한 부모태그는 미포함
+             */
+
+            $(btn3).click((e) => {
+                // wrap은 포함되지 않는다.
+                console.log($("span").parentsUntil("div.wrap").css(style));
+            });
+
+            $(btn4).click((e) => {
+                console.log($("span").parents("ul").css(style));
+            });
+        </script>
+
+        <h2>자식</h2>
+        <button id="btn5">직계자식</button>
+        <button id="btn6">모든후손</button>
+        <script>
+            /**
+             * children([selector])
+             */
+            $(btn5).click((e) => {
+                console.log($(".wrap").children().children().css(style));
+            });
+
+            /**
+             * find(selector)
+             */
+            $(btn6).click((e) => {
+                // console.log($(".wrap").find("li").css(style));
+
+                // selector, context
+                // .wrap 하위에서 li를 찾아라
+                console.log($("li", ".wrap").css(style));
+            });
+        </script>
+
+        <hr />
+        <h2>실습문제</h2>
+        <button id="btn7">실습문제</button>
+        <script>
+            $(btn7).click((e) => {
+                // 1. .wrap으로부터 li2-2 찾기
+                // $(".wrap").find("div:last ul:eq(1) li:nth-child(2)").css(style);
+
+                // 2. span#fromMe로부터 li2-2 찾기
+                $("span#fromMe").parents("li:nth-child(3)").prev().css(style);
+            });
+        </script>
+
+        <hr />
+        <h2>형제</h2>
+        <button id="btn8">siblings</button>
+        <button id="btn9">next</button>
+        <button id="btn10">prev</button>
+
+        <div class="container">
+            <p>p</p>
+            <span>span</span>
+            <h1>h1</h1>
+            <h2 id="hey">h2</h2>
+            <h3>h3</h3>
+            <h4>h4</h4>
+            <p>p</p>
+        </div>
+
+        <script>
+            /**
+             * siblings([selector])
+             */
+            $(btn8).click((e) => {
+                console.log($(hey).siblings().css(style));
+            });
+
+            /**
+             * next()
+             * nextAll([selector], ...)
+             * nextUntil(selector)
+             */
+            $(btn9).click((e) => {
+                console.log($(hey).next().css(style));
+            });
+
+            /**
+             * prev()
+             * prevAll([selector], ...)
+             * prevUntil(selector)
+             */
+            $(btn10).click((e) => {
+                console.log($(hey).prev().css(style));
+            });
+        </script>
+
+        <button id="btn11">최종실습</button>
+        <script>
+            const green = {
+                color: "green",
+                border: "2px solid red",
+            };
+            const blue = {
+                color: "blue",
+                border: "2px solid red",
+            };
+
+            /**
+             * .wrap에서 메소드 체이닝을 이용해 다음과 같이 처리하기
+             */
+
+            /**
+             *  TODO: 재귀로 짜려다가 실패한 상태
+             */
+            $(btn11).click(() => {
+                let result;
+                // do {
+                // result = console.log($(".type").each);
+                $(".type").each((_, div) => {
+                    // console.log(div, typeof div);
+                    getChild(div);
+                    // console.log($("span#fromMe").children());
+                });
+                // } while (result);
+            });
+
+            const getChild = (node) => {
+                const $node = $(node);
+
+                $node.each((_, child) => {
+                    getChild(child);
+                });
+
+                if ($node.children().length != 0) {
+                    console.log(node);
+                    getChild(node);
+                }
+                //  getChild($(node));
+                else return false;
+                // return !$(node).children() ?? getChild($(node));
+            };
+        </script>
+    </body>
+</html>

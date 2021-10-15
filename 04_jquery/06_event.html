@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>event</title>
+        <script src="js/jquery-3.6.0.js"></script>
+        <style>
+            .outer {
+                width: 200px;
+                height: 200px;
+                background-color: orange;
+                padding: 50px;
+                margin: 20px auto;
+            }
+            .inner {
+                width: 100%;
+                height: 100%;
+                background-color: tomato;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>event</h1>
+
+        <h2>mouseover - mouseout | mouseenter - mouseleave</h2>
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+
+        <script>
+            /**
+             * 부모요소에 handler 처리해도 자식 요소까지 handilng된다.
+             */
+            $(".outer")
+                .mouseover(({ target }) => {
+                    console.log("mouseover!", target);
+                })
+                .mouseout(({ target }) => {
+                    console.log("mouseout!", target);
+                });
+
+            /**
+             * 자식요소 진입시에는 핸들링하지 않는다.
+             * 이걸 많이 쓰기 때문에 아래 둘을 합친 hover가 있다.
+             */
+            $(".outer")
+                .mouseenter(({ target }) => {
+                    console.log("mouseenter!", target);
+                })
+                .mouseleave(({ target }) => {
+                    console.log("mouseleave!", target);
+                });
+
+            $(".outer").hover(
+                () => {
+                    console.log("hoverenter");
+                },
+                () => {
+                    console.log("hoverleave");
+                },
+            );
+        </script>
+
+        <h2>key event</h2>
+        <form action="javascript:alert('저장 완료');" name="memoFrm">
+            <fieldset>
+                <legend>twitter</legend>
+                <p><span id="counter">0</span>/30</p>
+                <textarea name="memo" id="memo" cols="30" rows="10"></textarea>
+                <button>저장</button>
+            </fieldset>
+        </form>
+
+        <script>
+            $(memo).keyup(({ target }) => {
+                const $target = $(target);
+                const len = $target.val().length;
+                const $counter = $(counter);
+                // $counter.html(len); // innerHTML
+                $counter.text(len).css("color", len > 30 ? "red" : "black"); // innerText
+            });
+
+            $(document.memoFrm).submit((e) => {
+                const len = $(memo).val().length;
+                if (len == 0 || len > 30) {
+                    // return false;
+                    e.preventDefault();
+                }
+            });
+        </script>
+
+        <h1 id="myh1">class 제어하기</h1>
+        <style>
+            .reverse {
+                background-color: #000;
+                color: #fff;
+            }
+        </style>
+        <script>
+            /**
+             * addClass, removeClass
+             * toggleClass도 있다.
+             */
+            $(myh1).hover(
+                (e) => {
+                    // mouseenter
+                    $(e.target).addClass("reverse");
+                },
+                (e) => {
+                    $(e.target).removeClass("reverse");
+                    // mouseleave
+                },
+            );
+        </script>
+
+        <h2>on | off</h2>
+        <button id="btn1">on | off</button>
+        <div class="wrapper">
+            <h1>안녕</h1>
+            <h2>잘가</h2>
+        </div>
+        <script>
+            // 여러 이벤트는 띄어쓰기로 구분 가능
+            $(btn1).on("click mouseover touchstart", (e) => {
+                const { type } = e;
+                switch (type) {
+                    case "click":
+                        alert("clicked");
+                        $(e.target).off("click");
+                        break;
+                    case "mouseover":
+                        console.log("mouseover");
+                        // alert("mouseover");
+                        break;
+                    case "touchstart":
+                        alert("touched");
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            // $(".wrapper h1").on("click", (e) => {
+            //     // 동적으로 태그객체 생성
+            //     const $h1 = $("<h1></h1>");
+            //     $h1.html("<mark>안녕</mark>");
+            //     $(".wrapper").append($h1);
+            // });
+
+            // 위에처럼 하면 새로 생성된 "".wrapper hi"에 대해서는 이벤트가 적용되지 않는다.
+            // 따라서 아래처럼 해야 한다.
+
+            const h1ClickHandler = (e) => {
+                const $h1 = $("<h1></h1>");
+                $h1.html("<mark>안녕</mark>");
+                $(".wrapper").append($h1);
+                $h1.click(h1ClickHandler);
+            };
+            //
+            $(".wrapper h1").on("click", h1ClickHandler);
+
+            /**
+             *  이벤트 전파의 특성 활용하기
+             *  ! 자식 요소 중, h1 선택자인 태그의 클릭 이벤트를 부모 요소에서 핸들링한다.
+             */
+            $(".wrapper").on("click", "h2", (e) => {
+                const $h1 = $("<h2></h2>");
+                $h1.html("<mark>잘가</mark>");
+                $(".wrapper").append($h1);
+                // $h1.click(h1ClickHandler); 이걸 해줄 필요가 없다.
+            });
+        </script>
+
+        <h2>trigger</h2>
+        <h1 class="trigger">0</h1>
+        <button id="btn-trigger">+</button>
+        <style>
+            .trigger {
+                text-align: center;
+                cursor: pointer;
+                color: tomato;
+            }
+        </style>
+        <script>
+            (() => {
+                let cnt = 0;
+                $(".trigger").on("click", (e) => {
+                    $(e.target).html(++cnt);
+                });
+            })();
+
+            $("#btn-trigger").click((e) => {
+                // .trigger click event handler 호출
+                $(".trigger").trigger("click");
+            });
+        </script>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </body>
+</html>

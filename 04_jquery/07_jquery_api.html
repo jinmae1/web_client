@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jquery api</title>
+        <script src="./js/jquery-3.6.0.js"></script>
+    </head>
+    <body>
+        <h1>jquery api</h1>
+        <h2>each | $.each</h2>
+
+        <button id="btn1">each</button>
+        <button id="btn2">$.each</button>
+        <button id="btn3">실습문제</button>
+        <div class="wrap"></div>
+
+        <script>
+            /**
+             * each
+             * $(selector | arr).each(callback)
+             */
+            $(btn1).on("click", (e) => {
+                const arr = ["a", "b", "c"];
+                console.log($(arr));
+
+                $(arr).each((i, ch) => {
+                    console.log(i, ch);
+                });
+            });
+
+            /**
+             * $.each
+             * $.each(arr | obj, callback)
+             */
+
+            // 배열순회
+            $(btn2).on("click", (e) => {
+                const arr = ["홍길동", "신사임당", "장보고"];
+                $.each(arr, (i, name) => {
+                    console.log(i, name);
+                });
+
+                const obj = {
+                    id: "honggd",
+                    name: "홍길동",
+                    age: 30,
+                    married: true,
+                };
+
+                // 객체순회
+                $.each(obj, (key, value) => {
+                    console.log(key, value);
+                });
+            });
+
+            /**
+             * 주어진 데이터를 .wrap 하위에 a태그로 만들어 추가하기
+             */
+            $(btn3).click((e) => {
+                const arr = [
+                    { name: "네이버", link: "http://www.naver.com" },
+                    { name: "구글", link: "http://www.google.com" },
+                    { name: "w3c", link: "http://www.w3c.com" },
+                    { name: "w3school", link: "http://www.w3schools.com" },
+                ];
+
+                const $wrap = $(".wrap");
+                // 아예 초기화 시키고 시작하기
+                $wrap.html("");
+                $wrap.empty();
+
+                $(arr).each((_, site) => {
+                    $.each(site, (key, value) => {
+                        // console.log(value);
+                    });
+                });
+
+                $(arr).each((_, site) => {
+                    const $a = $("<a></a>");
+                    $a.attr("href", site.link);
+                    $a.text(site.name);
+                    $(".wrap").append($a, " ");
+
+                    // $(".wrap").append(
+                    // `<a href="${site.link}">${site.name}</a><br />`,
+                    // );
+                });
+                // console.log(e.target);
+                // $(e.target).off("click");
+            });
+        </script>
+        <!-- <a href=""></a> -->
+    </body>
+</html>
